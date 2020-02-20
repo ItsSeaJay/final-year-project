@@ -16,6 +16,18 @@ var urlsToCache = [
 	'/css/boilerplate.css',
 	'/css/normalize.css',
 	'/js/main.js',
+	'/js/plugins.js',
+	'/404.html',
+	'/browserconfig.xml',
+	'/favicon.ico',
+	'/humans.txt',
+	'/icon.png',
+	'/index.html',
+	'/robots.txt',
+	'/serviceworker.js',
+	'/site.webmanifest',
+	'/tile-wide.png',
+	'/tile.png',
 ];
 
 self.addEventListener('install', function(event) {
