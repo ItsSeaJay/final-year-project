@@ -35,7 +35,26 @@ self.addEventListener('fetch', function(event) {
 				return response;
 			}
 
-			return fetch(event.request);
+			return fetch(event.request).then(
+				function(response) {
+					// Check if we received a valid response
+					if (!response || response.status !== 200 || response.type !== 'basic') {
+						return response;
+					}
+
+					// IMPORTANT: Clone the response. A response is a stream
+					// and because we want the browser to consume the response
+					// as well as the cache consuming the resposne, we need to
+					// clone it so that we are able to have multiple streams.
+					var responseToCache = response.clone();
+
+					caches.open(CACHE_NAME).then(function(cache) {
+						cache.put(event.request, responseTocache);
+					});
+
+					return response;
+				}
+			);
 		})
 	)
 });
