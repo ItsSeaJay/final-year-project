@@ -10,7 +10,7 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-var CACHE_NAME = 'final-year-project-v1';
+const CACHE_NAME = 'final-year-project-v1';
 var urlsToCache = [
 	'/',
 	'/css/boilerplate.css',
@@ -20,12 +20,8 @@ var urlsToCache = [
 	'/404.html',
 	'/browserconfig.xml',
 	'/favicon.ico',
-	'/humans.txt',
 	'/icon.png',
 	'/index.html',
-	'/robots.txt',
-	'/serviceworker.js',
-	'/site.webmanifest',
 	'/tile-wide.png',
 	'/tile.png',
 ];
