@@ -1,14 +1,19 @@
 {
-  "short_name": "Final Year Project",
-  "name": "Final Year Project | A Battle Tracker for 5th Edition Dungeons and Dragons",
-  "icons": [
-    {
-      "src": "icon.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    }
-  ],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#fafafa",
-  "theme_color": "#fafafa"
+	"short_name": "Final Year Project",
+	"name": "Final Year Project | A Battle Tracker for 5th Edition Dungeons and Dragons",
+	"icons": [
+		{
+		"src": "icon.png",
+		"type": "image/png",
+		"sizes": "192x192"
+		},
+		{
+		"src": "tile.png",
+		"type": "image/png",
+		"sizes": "558x558"
+		}
+	],
+	"start_url": ".",
+	"background_color": "#fafafa",
+	"theme_color": "#fafafa"
 }
