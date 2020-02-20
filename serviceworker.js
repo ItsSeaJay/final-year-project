@@ -14,7 +14,8 @@ var CACHE_NAME = 'final-year-project-v1';
 var urlsToCache = [
 	'/',
 	'/css/boilerplate.css',
-	'/js/main.js'
+	'/css/normalize.css',
+	'/js/main.js',
 ];
 
 self.addEventListener('install', function(event) {
