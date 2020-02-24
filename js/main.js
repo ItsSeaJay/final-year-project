@@ -16,5 +16,11 @@ $(document).ready(function () {
 });
 
 function addCreature(key) {
-	console.log(key);
+	var creatures;
+
+	$.getJSON('creatures.json', function(data) {
+		creatures = data;
+	});
+
+	$("section#initiative-list>ul").append("<li>test</li>");
 }
