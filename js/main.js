@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 		$.each(data, function(key, creature) {
 			if("name" in creature) {
-				creatures.push('<li id="' + key + '">' + creature["name"] + "</li>")
+				creatures.push('<li onclick="addCreature(' + key + ')" id="' + key + '">' + creature["name"] + "</li>")
 			}
 		});
 
@@ -14,3 +14,7 @@ $(document).ready(function () {
 		}).appendTo( "body" );
 	})
 });
+
+function addCreature(key) {
+	console.log(key);
+}
