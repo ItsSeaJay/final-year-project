@@ -1,7 +1,8 @@
+var creatures = [];
+var initiative_list = []
+
 $(document).ready(function () {
 	$.getJSON('creatures.json', function(data) {
-		var creatures = [];
-
 		$.each(data, function(key, creature) {
 			if("name" in creature) {
 				creatures.push('<li onclick="addCreature(' + key + ')" id="' + key + '">' + creature["name"] + "</li>")
@@ -16,11 +17,6 @@ $(document).ready(function () {
 });
 
 function addCreature(key) {
-	var creatures;
-
-	$.getJSON('creatures.json', function(data) {
-		creatures = data;
-	});
-
-	$("section#initiative-list>ul").append("<li>test</li>");
+	initiative_list.push(creatures[key])
+	console.log(initiative_list);
 }
