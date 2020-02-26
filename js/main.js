@@ -18,5 +18,20 @@ $(document).ready(function () {
 
 function addCreature(key) {
 	initiativeList.push(creatures[key]);
-	$('#initiative-list>ul').append('<li>' + creatures[key]["name"] + '</li>');
+	$('#initiative-list>table>tbody').append(
+		'<tr>' +
+			'<td>' + 
+				0 +
+			'</td>' +
+			'<td>' + 
+				creatures[key]["name"] +
+			'</td>' +
+			'<td>' + 
+				creatures[key]["hit_points"] +
+			'</td>' +
+			'<td>' + 
+				creatures[key]["armor_class"] +
+			'</td>' +
+		'</tr>'
+	);
 }
