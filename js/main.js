@@ -1,22 +1,22 @@
 var creatures = [];
-var initiative_list = []
+var initiativeList = [];
 
 $(document).ready(function () {
+	// Obtain the global creatures list from the JSON data
 	$.getJSON('creatures.json', function(data) {
+		var library = [];
+
+		creatures = data;
+
 		$.each(data, function(key, creature) {
 			if("name" in creature) {
-				creatures.push('<li onclick="addCreature(' + key + ')" id="' + key + '">' + creature["name"] + "</li>")
+				$('#library>ul').append('<li onclick="addCreature(' + key + ')" id="' + key + '">' + creature["name"] + '</li>');
 			}
 		});
-
-		$( "<ul/>", {
-			"class": "my-new-list",
-			html: creatures.join( "" )
-		}).appendTo( "body" );
 	})
 });
 
 function addCreature(key) {
-	initiative_list.push(creatures[key])
-	console.log(initiative_list);
+	initiativeList.push(creatures[key]);
+	$('#initiative-list>ul').append('<li>' + creatures[key]["name"] + '</li>');
 }

@@ -2,3 +2,7 @@
 	margin: auto;
 	padding: 1em;
 }
+
+main > section {
+	float: left;
+}
