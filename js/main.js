@@ -37,8 +37,14 @@ function addCreature(key) {
 	'</tr>';
 
 	// Add the markup into the DOM and associate an anonymous event with it
-	var newListing = $('#initiative-list>table>tbody').append(html);
-	newListing.click(function () {
-		$(this).children().remove()
+	$('#initiative-list>table>tbody').append(html);
+	$('#initiative-list>table>tbody').children().each(function() {
+		var id = $(this).data('id');
+
+		if (id === (initiativeList.length - 1)) {
+			$(this).click(function() {
+				$(this).remove();
+			});
+		}
 	});
 }
