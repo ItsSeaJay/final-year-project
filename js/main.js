@@ -2,10 +2,10 @@ var creatures = [];
 var initiative_list = [];
 
 var states = {
-	"normal": 0,
-	"combat": 1
+	normal: 0,
+	combat: 1,
 }
-var state = states["normal"];
+var state = states.normal;
 
 $(document).ready(function () {
 	// Obtain the global creatures list from the JSON data
@@ -63,5 +63,23 @@ $(document).ready(function () {
 		});
 	});
 
-	
+	// Add a click event to the start button
+	$('#action-bar').children('button').eq(0).click(function() {
+		switch(state) {
+			case states.normal:
+				if (initiative_list.length > 1) {
+					// Transition into the combat state
+					this.innerHTML = 'End Combat';
+					state = states.combat;
+				} else {
+					// Can't start the encounter unless there is more than one combatant
+					alert('Can\'t start an encounter; more than one combatant needs to be present!');
+				}
+				break;
+			case states.combat:
+				this.innerHTML = 'Begin Encounter'
+				state = states.normal;
+				break;
+		}
+	});
 });
