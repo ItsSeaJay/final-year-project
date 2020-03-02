@@ -77,6 +77,17 @@ $(document).ready(function () {
 
 					// Hide the library
 					$('#library').addClass('hidden');
+
+					// Roll for initiative!
+					for (creature in initiative_list) {
+						var initiative_roll = Math.round(Math.random() * 20);
+						var initiative_bonus = Math.round((initiative_list[creature]["dexterity"] - 10) / 2);
+						
+						// Remember to factor dexterity for initiative score calculation
+						initiative_list[creature]["initiative"] = initiative_roll + initiative_bonus;
+
+						$('#initiative-modal>ul').append('<li>' + initiative_list[creature]["initiative"] + '</li>');
+					}
 				} else {
 					// Can't start the encounter unless there is more than one combatant
 					alert('Can\'t start an encounter; more than one combatant needs to be present!');
