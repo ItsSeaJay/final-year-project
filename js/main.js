@@ -1,5 +1,5 @@
 var creatures = [];
-var initiative_list = [];
+var initiative_order = [];
 
 var states = {
 	normal: 0,
@@ -26,14 +26,16 @@ $(document).ready(function () {
 
 		$('#library>ul').children().each(function() {
 			$(this).click(function() {
-				var initiative_list_body = $('#initiative-list>table>tbody');
+				var initiative_order_body = $('#initiative-list>table>tbody');
 				var key = $(this).data('id');
 
-				initiative_list.push(creatures[key]);
+				initiative_order.push({
+					"key": key
+				});
 
-				var html = '<tr data-id="' + (initiative_list.length - 1) + '" data-key="' + key + '">' +
+				var html = '<tr data-id="' + (initiative_order.length - 1) + '" data-key="' + key + '">' +
 					'<td>' +
-						(initiative_list.length - 1) +
+						(initiative_order.length - 1) +
 					'</td>' +
 					'<td>' +
 						creatures[key]["name"] +
@@ -51,13 +53,13 @@ $(document).ready(function () {
 				$('#initiative-list>table>tbody').children().each(function() {
 					var id = $(this).data('id');
 
-					if (id === (initiative_list.length - 1)) {
+					if (id === (initiative_order.length - 1)) {
 						$(this).click(function() {
 							// Only allow the user to remove combatants during the selction phase
 							if (state == states.normal) {
 								$(this).remove();
 
-								var index = initiative_list.indexOf(creatures[key]);
+								var index = initiative_order.indexOf(creatures[key]);
 							}
 						});
 					}
@@ -70,7 +72,7 @@ $(document).ready(function () {
 	$('#action-bar').children('button').eq(0).click(function() {
 		switch(state) {
 			case states.normal:
-				if (initiative_list.length > 1) {
+				if (initiative_order.length > 1) {
 					// Transition into the combat state
 					this.innerHTML = 'End Combat';
 					state = states.combat;
@@ -79,15 +81,22 @@ $(document).ready(function () {
 					$('#library').addClass('hidden');
 
 					// Roll for initiative!
-					for (creature in initiative_list) {
+					for (creature in initiative_order) {
 						var initiative_roll = Math.round(Math.random() * 20);
-						var initiative_bonus = Math.round((initiative_list[creature]["dexterity"] - 10) / 2);
+						var initiative_bonus = Math.round((creatures[initiative_order[creature]["key"]]["dexterity"] - 10) / 2);
 						
 						// Remember to factor dexterity for initiative score calculation
-						initiative_list[creature]["initiative"] = initiative_roll + initiative_bonus;
+						initiative_order[creature]["score"] = initiative_roll + initiative_bonus;
 
-						$('#initiative-modal>ul').append('<li>' + initiative_list[creature]["initiative"] + '</li>');
+						$('#initiative-modal>ul').append('<li>' + initiative_order[creature]["score"] + '</li>');
 					}
+
+					// Sort the list into descending order
+					initiative_order.sort(function (a, b) {
+						return b["score"] - a["score"];
+					});
+
+					console.log(initiative_order);
 				} else {
 					// Can't start the encounter unless there is more than one combatant
 					alert('Can\'t start an encounter; more than one combatant needs to be present!');
