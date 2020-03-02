@@ -1,6 +1,12 @@
 var creatures = [];
 var initiative_list = [];
 
+var states = {
+	"normal": 0,
+	"combat": 1
+}
+var state = states["normal"];
+
 $(document).ready(function () {
 	// Obtain the global creatures list from the JSON data
 	$.getJSON('creatures.json', function(data) {
@@ -56,4 +62,6 @@ $(document).ready(function () {
 			});
 		});
 	});
+
+	
 });
