@@ -53,9 +53,12 @@ $(document).ready(function () {
 
 					if (id === (initiative_list.length - 1)) {
 						$(this).click(function() {
-							$(this).remove();
+							// Only allow the user to remove combatants during the selction phase
+							if (state == states.normal) {
+								$(this).remove();
 
-							var index = initiative_list.indexOf(creatures[key]);
+								var index = initiative_list.indexOf(creatures[key]);
+							}
 						});
 					}
 				});
@@ -71,14 +74,21 @@ $(document).ready(function () {
 					// Transition into the combat state
 					this.innerHTML = 'End Combat';
 					state = states.combat;
+
+					// Hide the library
+					$('#library').addClass('hidden');
 				} else {
 					// Can't start the encounter unless there is more than one combatant
 					alert('Can\'t start an encounter; more than one combatant needs to be present!');
 				}
 				break;
 			case states.combat:
+				// Reverse the global state back to normal
 				this.innerHTML = 'Begin Encounter'
 				state = states.normal;
+
+				// Show the library
+				$('#library').removeClass('hidden');
 				break;
 		}
 	});
