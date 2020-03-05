@@ -46,7 +46,7 @@ $(document).ready(function () {
 					'<td>' + 
 						creatures[key]["armor_class"] +
 					'</td>' +
-				'</tr>';
+					'</tr>';
 
 				// Add the markup into the DOM and associate an anonymous event with it
 				$('#initiative-list>table>tbody').append(html);
@@ -97,6 +97,37 @@ $(document).ready(function () {
 					});
 
 					console.log(initiative_order);
+
+					$('#initiative-modal').append('<button id="confirm-button">Confirm</button>');
+
+					$('#confirm-button').click(function() {
+						// Clear the unneeded HTML
+						$('#initiative-modal>ul').html('');
+						$('#initiative-list>table>tbody').html('');
+
+						// Re-do the initiative list in order
+						for (creature in initiative_order) {
+							var html = '<tr data-id="' + (initiative_order.length - 1) + '" data-key="' + creature["key"] + '">' +
+								'<td>' +
+									creature +
+								'</td>' +
+								'<td>' +
+									creatures[initiative_order[creature]["key"]]["name"] +
+								'</td>' +
+								'<td>' + 
+									creatures[initiative_order[creature]["key"]]["hit_points"] +
+								'</td>' +
+								'<td>' + 
+									creatures[initiative_order[creature]["key"]]["armor_class"] +
+								'</td>' +
+								'</tr>';
+
+							$('#initiative-list>table>tbody').append(html);
+						}
+
+						// Remove the confirm button
+						$('#confirm-button').remove();
+					});
 				} else {
 					// Can't start the encounter unless there is more than one combatant
 					alert('Can\'t start an encounter; more than one combatant needs to be present!');
