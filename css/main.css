@@ -6,3 +6,7 @@
 main > div {
 	float: left;
 }
+
+tr.active {
+	background-color: whitesmoke;
+}

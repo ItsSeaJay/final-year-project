@@ -7,6 +7,9 @@ var states = {
 }
 var state = states.normal;
 
+var turn = 0;
+var round = 0;
+
 $(document).ready(function () {
 	// Obtain the global creatures list from the JSON data
 	$.getJSON('creatures.json', function(data) {
@@ -35,7 +38,7 @@ $(document).ready(function () {
 
 				var html = '<tr data-id="' + (initiative_order.length - 1) + '" data-key="' + key + '">' +
 					'<td>' +
-						(initiative_order.length - 1) +
+						'?' +
 					'</td>' +
 					'<td>' +
 						creatures[key]["name"] +
@@ -109,7 +112,7 @@ $(document).ready(function () {
 						for (creature in initiative_order) {
 							var html = '<tr data-id="' + (initiative_order.length - 1) + '" data-key="' + creature["key"] + '">' +
 								'<td>' +
-									creature +
+									initiative_order[creature]["score"] +
 								'</td>' +
 								'<td>' +
 									creatures[initiative_order[creature]["key"]]["name"] +
@@ -127,6 +130,17 @@ $(document).ready(function () {
 
 						// Remove the confirm button
 						$('#confirm-button').remove();
+
+						// Ensure the current creature is displayed as active
+						document.querySelector('#initiative-list>table>tbody').children[0].classList.add('active');
+
+						// Add the "Next Turn" button
+						$('#action-bar').append('<button>Next Turn</button>');
+
+						document.querySelector('#action-bar').children[1].addEventListener('click', function() {
+							turn++;
+							console.log(turn);
+						});
 					});
 				} else {
 					// Can't start the encounter unless there is more than one combatant
