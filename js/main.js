@@ -137,9 +137,17 @@ $(document).ready(function () {
 						// Add the "Next Turn" button
 						$('#action-bar').append('<button>Next Turn</button>');
 
+						// Add a click option for the 
 						document.querySelector('#action-bar').children[1].addEventListener('click', function() {
-							turn++;
-							console.log(turn);
+
+							for (child in document.querySelector('#initiative-list > table > tbody').children) {
+								console.log(child);
+
+								if (child === turn) {
+									document.querySelector('#initiative-list > table > tbody').classList.remove('active');
+									console.log('test');
+								}
+							}
 						});
 					});
 				} else {
