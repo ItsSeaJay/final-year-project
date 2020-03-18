@@ -35,9 +35,10 @@
 			<div id="library">
 				<ul>
 					<creature-listing
-					v-for="creature in creatures"
+					v-for="(creature, index) in creatures"
 					v-bind:creature="creature"
-					v-on:click="greet"></creature-listing>
+					v-on:click="addCreature"
+					:key="creature.name"></creature-listing>
 				</ul>
 			</div>
 			<div id="initiative">

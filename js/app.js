@@ -14,6 +14,11 @@ var app = new Vue({
         creatures: [],
         initiativeOrder: []
     },
+    methods: {
+    	addCreature: function (event) {
+    		console.log(event);
+    	}
+    },
     created: function () {
         // this runs when the component is mounted
         fetch("creatures.json")
