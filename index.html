@@ -54,7 +54,6 @@
 		</main> -->
 
 		<main id="app">
-			{{ message }}
 			<div class="sidebar">
 				<nav id="commands">
 					<ul>
@@ -66,13 +65,35 @@
 			</div>
 			<div id="library">
 				<ul>
-					
+					<creature-listing
+					v-for="creature in creatures"
+					v-bind:creature="creature"
+					v-on:click="greet"></creature-listing>
 				</ul>
+			</div>
+			<div id="initiative">
+				<table>
+					<thead>
+						<tr>
+							<th>Initiative</th>
+							<th>Name</th>
+							<th>Hit Points</th>
+							<th>Armor Class</th>
+						</tr>
+					</thead>
+					<tbody>
+						<combatant
+						v-for="combatant in initiativeOrder"
+						v-bind:combatant="creature">
+					</tbody>
+				</table>
 			</div>
 		</main>
 
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
-		<script src="serviceworker.js"></script>
+		<!-- <script src="serviceworker.js"></script> -->
 		<script src="js/app.js"></script>
 	</body>
 </html>

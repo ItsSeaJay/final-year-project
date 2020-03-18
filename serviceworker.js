@@ -16,7 +16,6 @@ var urlsToCache = [
 	'/css/boilerplate.css',
 	'/css/normalize.css',
 	'/js/app.js',
-	'/js/plugins.js',
 	'/404.html',
 	'/browserconfig.xml',
 	'/favicon.ico',
