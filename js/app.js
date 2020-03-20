@@ -4,7 +4,7 @@ Vue.component(
 		props: [
 			'creature'
 		],
-		template: '<li>{{ creature.name }}</li>'
+		template: '<li>{{ index }} {{ creature.name }}</li>'
 	}
 );
 
@@ -12,14 +12,14 @@ Vue.component(
 	'combatant',
 	{
 		props: [
-			'creature'
+			'combatant'
 		],
 		template: `
 			<tr>
 				<td>?</td>
-				<td>{{ creature.name }}</td>
-				<td>{{ creature.hit_points }}</td>
-				<td>{{ creature.armor_class }}</td>
+				<td>{{ combatant.name }}</td>
+				<td>{{ combatant.hit_points }}</td>
+				<td>{{ combatant.armor_class }}</td>
 			</tr>
 		`
 	}
@@ -32,16 +32,8 @@ var app = new Vue({
 		initiativeOrder: []
 	},
 	methods: {
-		addCreature: function (event) {
-			for (creature in this.creatures) {
-				// Search for the creature in the array
-				if (this.creatures[creature].name === event.target.innerHTML) {
-					// Add that creature to the initiative order
-					this.initiativeOrder.push(this.creatures[creature]);
-				}
-			}
-
-			console.log(this.initiativeOrder);
+		addCreature: function (index) {
+			this.initiativeOrder.push(this.creatures[index]);
 		}
 	},
 	created: function () {

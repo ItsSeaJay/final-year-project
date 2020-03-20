@@ -35,9 +35,9 @@
 			<div id="library">
 				<ul>
 					<creature-listing
-					v-for="creature in creatures"
+					v-for="(index, creature) in creatures"
 					v-bind:creature="creature"
-					v-on:click="addCreature"></creature-listing>
+					v-on:click="addCreature(index)"></creature-listing>
 				</ul>
 			</div>
 			<div id="initiative">
@@ -53,7 +53,7 @@
 					<tbody>
 						<combatant
 						v-for="combatant in initiativeOrder"
-						v-bind:combatant="creature">
+						v-bind:combatant="combatant">
 					</tbody>
 				</table>
 			</div>
