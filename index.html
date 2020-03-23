@@ -41,21 +41,7 @@
 				</ul>
 			</div>
 			<div id="initiative">
-				<table>
-					<thead>
-						<tr>
-							<th>Initiative</th>
-							<th>Name</th>
-							<th>Hit Points</th>
-							<th>Armor Class</th>
-						</tr>
-					</thead>
-					<tbody>
-						<combatant
-						v-for="combatant in initiativeOrder"
-						v-bind:combatant="combatant">
-					</tbody>
-				</table>
+				<initiative-list></initiative-list>
 			</div>
 		</main>
 

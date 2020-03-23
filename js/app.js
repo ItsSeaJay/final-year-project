@@ -9,18 +9,17 @@ Vue.component(
 );
 
 Vue.component(
-	'combatant',
+	'initiative-list',
 	{
 		props: [
-			'combatant'
+			'initiativeOrder'
 		],
 		template: `
-			<tr>
-				<td>?</td>
-				<td>{{ combatant.name }}</td>
-				<td>{{ combatant.hit_points }}</td>
-				<td>{{ combatant.armor_class }}</td>
-			</tr>
+			<table>
+				<tr v-for="i in 32">
+					<td>{{ i }}</td>
+				</tr>
+			</table>
 		`
 	}
 )
