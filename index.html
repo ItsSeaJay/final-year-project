@@ -26,8 +26,10 @@
 			<div class="sidebar">
 				<nav id="commands">
 					<ul>
-						<li>
-							<button type="button">Begin Encounter</button>
+						<li v-if="state === 0">
+							<button type="button" v-on:click="setupEncounter($event)">
+								Begin Encounter
+							</button>
 						</li>
 					</ul>
 				</nav>
@@ -41,7 +43,8 @@
 				</ul>
 			</div>
 			<div id="initiative">
-				<initiative :data="initiativeOrder"></initiative>
+				<initiative-order :data="initiativeOrder"></initiative-order>
+				<initiative-modal :data="initiativeOrder" v-if="state === 1"></initiative-modal>
 			</div>
 		</main>
 
