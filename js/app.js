@@ -8,27 +8,38 @@ Vue.component(
 	}
 );
 
-Vue.component(
-	'initiative-list',
-	{
-		props: [
-			'initiativeOrder'
-		],
-		template: `
-			<table>
-				<tr v-for="i in 32">
-					<td>{{ i }}</td>
-				</tr>
-			</table>
-		`
-	}
-)
-
 var app = new Vue({
 	el: '#app',
 	data: {
 		creatures: [],
 		initiativeOrder: []
+	},
+	components: {
+		initiative: {
+			props: [
+				'data'
+			],
+			template: `
+				<table> 
+                    <thead>
+                        <tr>
+                            <th>Initiative</th>
+                            <th>Name</th>
+                            <th>Hit Points</th>
+                            <th>Armor Class</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for='combatant in data'>
+                            <td>?</td>
+                            <td>{{ combatant.name }}</td>
+                            <td>{{ combatant.hit_points }}</td>
+                            <td>{{ combatant.armor_class }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+			`
+		}
 	},
 	methods: {
 		addCreature: function (index) {
