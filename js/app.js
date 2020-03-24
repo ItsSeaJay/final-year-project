@@ -61,7 +61,6 @@ var app = new Vue({
 							<input type="number" value="{{ combatant.initiative_score }}" v-on:input="updateInitiative(index, $value)">
 						</li>
 					</ul>
-					<button type="button">Cancel</button>
 					<button type="button" v-on:click="beginCombat">Confirm</button>
 				</div>
 			`
@@ -73,7 +72,7 @@ var app = new Vue({
 			// dexterity score
 			var initiativeBonus = Math.floor((this.initiativeOrder[combatant].dexterity - 10) / 2);
 			// Roll the initiative score for this creature based on the bonus
-			var initiativeScore = Math.round(Math.random() * 20) + initiativeBonus;
+			var initiativeScore = Math.round(Math.random() * (20 + 1)) + initiativeBonus;
 		
 			creature.initiative_score = initiativeScore;
 		},
@@ -104,7 +103,7 @@ var app = new Vue({
 			this.state = states.precombat;
 		},
 		cancelEncounter: function (event) {
-
+			this.state = states.normal;
 		},
 		beginCombat: function (event) {
 			this.state = states.combat;
