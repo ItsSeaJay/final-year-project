@@ -44,7 +44,10 @@
 			</div>
 			<div id="initiative">
 				<initiative-order :data="initiativeOrder"></initiative-order>
-				<initiative-modal :data="initiativeOrder" v-if="state === 1"></initiative-modal>
+				<initiative-modal
+				:data="initiativeOrder"
+				v-on:begin-combat="beginCombat($event)"
+				v-if="state === 1"></initiative-modal>
 			</div>
 		</main>
 

@@ -61,7 +61,7 @@ var app = new Vue({
 							<input type="number" value="{{ combatant.initiative_score }}" v-on:input="updateInitiative(index, $value)">
 						</li>
 					</ul>
-					<button type="button" v-on:click="beginCombat">Confirm</button>
+					<button type="button" v-on:click="$emit('begin-combat')">Confirm</button>
 				</div>
 			`
 		}
