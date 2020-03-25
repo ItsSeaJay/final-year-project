@@ -59,9 +59,10 @@ var app = new Vue({
 						<li>
 							<span>{{ index }} - {{ combatant.name }}</span>
 							<input
+							data-index="{{ index }}"
 							type="number"
 							value="{{ combatant.initiative_score }}"
-							v-on:input="$emit('update-initiative', index)">
+							v-on:input="$emit('piss', $event)">
 						</li>
 					</ul>
 					<button
@@ -83,10 +84,15 @@ var app = new Vue({
 		
 			creature.initiative_score = initiativeScore;
 		},
-		updateInitiative: function (index, value) {
+		updateInitiative: function (event) {
+			console.log(event.target);
+			
+			var index = event.target.getAttribute('data-index');
+
 			console.log(index);
 
-			this.initiativeOrder[index].initiative_score = value;
+			// Update the initiative score of that specific creature
+			this.initiativeOrder[index].initiative_score = event.data;
 		},
 		addCreature: function (index) {
 			var nextCombatant = JSON.parse(JSON.stringify(this.creatures[index]));
@@ -112,10 +118,8 @@ var app = new Vue({
 				// Roll the initiative score for this creature based on the bonus
 				var initiativeScore = Math.round(Math.random() * (20 + 1)) + initiativeBonus;
 			
-				this.initatiativeOrder[combatant].initiative_score = initiativeScore;
+				this.initiativeOrder[combatant].initiative_score = initiativeScore;
 			}
-
-			console.log(this.initatiativeOrder);
 
 			this.state = states.precombat;
 		},
