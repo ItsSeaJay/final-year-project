@@ -85,14 +85,18 @@ var app = new Vue({
 			creature.initiative_score = initiativeScore;
 		},
 		updateInitiative: function (event) {
-			console.log(event.target);
-			
+			console.log(event);
+
 			var index = event.target.getAttribute('data-index');
+			var clone = JSON.parse(JSON.stringify(this.initiativeOrder[index]));
 
-			console.log(index);
+			// Update the initiative score of the clone
+			clone.initiative_score = event.data;
 
-			// Update the initiative score of that specific creature
-			this.initiativeOrder[index].initiative_score = event.data;
+			console.log(clone.initiative_score);
+
+			// Replace the creature in the list with the clone
+			this.$set(this.initiativeOrder,	index, clone);
 		},
 		addCreature: function (index) {
 			var nextCombatant = JSON.parse(JSON.stringify(this.creatures[index]));
@@ -117,7 +121,8 @@ var app = new Vue({
 				var initiativeBonus = Math.floor((this.initiativeOrder[combatant].dexterity - 10) / 2);
 				// Roll the initiative score for this creature based on the bonus
 				var initiativeScore = Math.round(Math.random() * (20 + 1)) + initiativeBonus;
-			
+				var clone = JSON.parse(JSON.stringify(this.creatures));
+
 				this.initiativeOrder[combatant].initiative_score = initiativeScore;
 			}
 
