@@ -62,7 +62,7 @@ var app = new Vue({
 							data-index="{{ index }}"
 							type="number"
 							value="{{ combatant.initiative_score }}"
-							v-on:input="$emit('piss', $event)">
+							v-on:input="$emit('updateinitiative', $event)">
 						</li>
 					</ul>
 					<button
@@ -96,7 +96,9 @@ var app = new Vue({
 			console.log(clone.initiative_score);
 
 			// Replace the creature in the list with the clone
-			this.$set(this.initiativeOrder,	index, clone);
+			// this.$set(this.initiativeOrder,	index, clone);
+
+			this.initiativeOrder[index].initiative_score = event.data;
 		},
 		addCreature: function (index) {
 			var nextCombatant = JSON.parse(JSON.stringify(this.creatures[index]));
@@ -123,7 +125,7 @@ var app = new Vue({
 				var initiativeScore = Math.round(Math.random() * (20 + 1)) + initiativeBonus;
 				var clone = JSON.parse(JSON.stringify(this.creatures));
 
-				this.initiativeOrder[combatant].initiative_score = initiativeScore;
+				this.rollInitiative(this.initiativeOrder[combatant]);
 			}
 
 			this.state = states.precombat;
@@ -134,6 +136,14 @@ var app = new Vue({
 		beginCombat: function (event) {
 			this.state = states.combat;
 			console.log(this.state);
+
+			console.log(this.initiativeOrder);
+
+			this.initiativeOrder.sort(function (first, second) {
+				return first.initiative_score + second.initiative_score;
+			});
+
+			console.log(this.initiativeOrder);
 		}
 	},
 	created: function () {
