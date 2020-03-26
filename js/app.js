@@ -85,20 +85,11 @@ var app = new Vue({
 			creature.initiative_score = initiativeScore;
 		},
 		updateInitiative: function (event) {
-			console.log(event);
+			console.log(event.target.value);
 
 			var index = event.target.getAttribute('data-index');
-			var clone = JSON.parse(JSON.stringify(this.initiativeOrder[index]));
 
-			// Update the initiative score of the clone
-			clone.initiative_score = event.data;
-
-			console.log(clone.initiative_score);
-
-			// Replace the creature in the list with the clone
-			// this.$set(this.initiativeOrder,	index, clone);
-
-			this.initiativeOrder[index].initiative_score = event.data;
+			this.initiativeOrder[index].initiative_score = parseFloat(event.target.value);
 		},
 		addCreature: function (index) {
 			var nextCombatant = JSON.parse(JSON.stringify(this.creatures[index]));
@@ -135,12 +126,10 @@ var app = new Vue({
 		},
 		beginCombat: function (event) {
 			this.state = states.combat;
-			console.log(this.state);
 
-			console.log(this.initiativeOrder);
-
+			// Sort the table into order
 			this.initiativeOrder.sort(function (first, second) {
-				return first.initiative_score + second.initiative_score;
+				return first.initiative_score < second.initiative_score;
 			});
 
 			console.log(this.initiativeOrder);
