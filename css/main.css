@@ -19,13 +19,15 @@ main > div {
 /* Style the tabs */
 .tabs {
 	overflow: hidden;
-	margin-left: 20px;
-	margin-bottom: -2px;
 }
 
 .tabs ul {
 	list-style-type: none;
 	margin-left: 20px;
+}
+
+li {
+	list-style: none;
 }
 
 li:hover {
@@ -62,9 +64,7 @@ li:hover {
 
 /* Style the tab content */
 .tab-content {
-	padding: 30px;
 	border: 1px solid #ccc;
-	border-radius: 10px;
 	max-height: 100vh;
 	overflow: scroll;
 }
