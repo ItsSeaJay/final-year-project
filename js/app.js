@@ -19,7 +19,10 @@ var app = new Vue({
 	data: {
 		state: states.normal,
 		creatures: [],
-		initiativeOrder: []
+		initiativeOrder: [],
+		activeCombatant: 0,
+		turn: 0,
+		activeTab: 1
 	},
 	components: {
 		'initiative-order': {
@@ -38,13 +41,13 @@ var app = new Vue({
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for='(index, combatant) in data'>
-                            <td>{{ index }}</td>
-                            <td>{{ combatant.initiative_score }}</td>
-                            <td>{{ combatant.name }}</td>
-                            <td>{{ combatant.hit_points }}</td>
-                            <td>{{ combatant.armor_class }}</td>
-                        </tr>
+						<tr v-for="(index, combatant) in data">
+							<td>{{ index }}</td>
+							<td>{{ combatant.initiative_score }}</td>
+							<td>{{ combatant.name }}</td>
+							<td>{{ combatant.hit_points }}</td>
+							<td>{{ combatant.armor_class }}</td>
+						</tr>
                     </tbody>
                 </table>
 			`
@@ -133,6 +136,10 @@ var app = new Vue({
 			});
 
 			console.log(this.initiativeOrder);
+		},
+		advanceTurn: function (event) {
+			this.turn += 1;
+			console.log(this.turn);
 		}
 	},
 	created: function () {
@@ -142,3 +149,10 @@ var app = new Vue({
 			.then(creatures => { this.creatures = creatures })
 	}
 });
+
+var library = new Vue({
+	el: '#library',
+	data: {
+		activeTab: 1
+	}
+})

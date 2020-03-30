@@ -31,16 +31,36 @@
 								Begin Encounter
 							</button>
 						</li>
+						<li v-if="state == 2">
+							<button type="button" v-on:click="advanceTurn($event)">
+								Next Turn
+							</button>
+						</li>
 					</ul>
 				</nav>
 			</div>
-			<div id="library">
-				<ul>
-					<creature-listing
-					v-for="(index, creature) in creatures"
-					v-bind:creature="creature"
-					v-on:click="addCreature(index)"></creature-listing>
-				</ul>
+			<div id="library" class="container">
+				<div class="tabs">
+					<a v-on:click="activeTab = 1" v-bind:class="[ activeTab === 1 ? 'active' : '' ]">Creatures</a>
+					<a v-on:click="activeTab = 2" v-bind:class="[ activeTab === 2 ? 'active' : '' ]">Characters</a>
+					<a v-on:click="activeTab = 3" v-bind:class="[ activeTab === 3 ? 'active' : '' ]">Encounters</a>
+				</div>
+				<div class="content">
+					<div v-if="activeTab === 1" class="tab-content">
+						<ul>
+							<creature-listing
+							v-for="(index, creature) in creatures"
+							v-bind:creature="creature"
+							v-on:click="addCreature(index)"></creature-listing>
+						</ul>
+					</div>
+					<div v-if="activeTab === 2" class="tab-content">
+						<p>Characters</p>
+					</div>
+					<div v-if="activeTab === 3" class="tab-content">
+						<p>Encounters</p>
+					</div>
+				</div>
 			</div>
 			<div id="initiative">
 				<initiative-order :data="initiativeOrder"></initiative-order>

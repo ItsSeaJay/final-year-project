@@ -7,6 +7,64 @@ main > div {
 	float: left;
 }
 
-tr.active {
+.active {
 	background-color: whitesmoke;
+}
+
+.container { 
+	color: #888;
+	overflow: scroll;
+}
+
+/* Style the tabs */
+.tabs {
+	overflow: hidden;
+	margin-left: 20px;
+	margin-bottom: -2px;
+}
+
+.tabs ul {
+	list-style-type: none;
+	margin-left: 20px;
+}
+
+li:hover {
+	background-color: whitesmoke;
+}
+
+.tabs a {
+	float: left;
+	cursor: pointer;
+	padding: 12px 24px;
+	transition: background-color 0.2s;
+	border: 1px solid #ccc;
+	border-right: none;
+	background-color: #f1f1f1;
+	font-weight: bold;
+}
+.tabs a:last-child { 
+	border-right: 1px solid #ccc;
+}
+
+/* Change background color of tabs on hover */
+.tabs a:hover {
+	background-color: #aaa;
+	color: #fff;
+}
+
+/* Styling for active tab */
+.tabs a.active {
+	background-color: #fff;
+	color: #484848;
+	border-bottom: 2px solid #fff;
+	cursor: default;
+}
+
+/* Style the tab content */
+.tab-content {
+	padding: 30px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	max-height: 100vh;
+	overflow: scroll;
 }
