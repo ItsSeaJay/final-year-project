@@ -58,6 +58,8 @@ var app = new Vue({
 			],
 			template: `
 				<div class="modal">
+					<h2>Initiative Rolls</h2>
+
 					<ul v-for="(index, combatant) in data">
 						<li>
 							<span>{{ index }} - {{ combatant.name }}</span>
@@ -150,9 +152,10 @@ var app = new Vue({
 	}
 });
 
-var library = new Vue({
-	el: '#library',
-	data: {
-		activeTab: 1
-	}
-})
+// Configure IndexedDB
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+if (!window.indexedDB) {
+   window.alert("Your browser doesn't support a stable version of IndexedDB.");
+}

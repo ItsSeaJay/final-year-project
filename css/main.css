@@ -38,9 +38,8 @@ li {
 	padding: 8px;
 }
 
-li:hover {
-	background-color: whitesmoke;
-	font-weight: bold;
+.tab-content li:hover {
+	background-color: lightgrey;
 }
 
 .tabs a {
