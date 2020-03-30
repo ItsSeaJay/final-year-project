@@ -36,6 +36,11 @@
 								Next Turn
 							</button>
 						</li>
+						<li v-if="state == 2">
+							<button type="button" v-on:click="state = 0">
+								End Encounter
+							</button>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -55,7 +60,11 @@
 						</ul>
 					</div>
 					<div v-if="activeTab === 2" class="tab-content">
-						<p>Characters</p>
+						<button type="button">Create Character</button>
+
+						<ul>
+							<li v-for="(index, character) in 12"></li>
+						</ul>
 					</div>
 					<div v-if="activeTab === 3" class="tab-content">
 						<p>Encounters</p>
