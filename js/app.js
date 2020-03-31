@@ -42,7 +42,7 @@ var app = new Vue({
                         </tr>
                     </thead>
                     <tbody>
-						<tr v-for="(index, combatant) in data">
+						<tr v-for="(index, combatant) in data" v-bind:class="{ active: index }">
 							<td>{{ index }}</td>
 							<td>{{ combatant.initiative_score }}</td>
 							<td>{{ combatant.name }}</td>
@@ -156,6 +156,9 @@ var app = new Vue({
 		advanceTurn: function (event) {
 			this.turn += 1;
 			console.log(this.turn);
+		},
+		getActive: function (event) {
+			console.log(event);
 		}
 	},
 	created: function () {

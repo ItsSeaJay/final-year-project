@@ -79,13 +79,14 @@
 					</div>
 				</div>
 			</div>
-			<new-character-form v-if=""></new-character-form>
-			<div id="initiative">
+			<new-character-form v-if="newCharacterForm"></new-character-form>
+			<div id="initiative" v-if="!newCharacterForm">
 				<initiative-order :data="initiativeOrder"></initiative-order>
 				<initiative-modal
 				:data="initiativeOrder"
 				v-on:begin-combat="beginCombat($event)"
 				v-on:updateinitiative="updateInitiative"
+				v-on:getactive="getActive"
 				v-if="state === 1"></initiative-modal>
 			</div>
 		</main>

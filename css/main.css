@@ -93,7 +93,13 @@ li {
 	padding: 8px;
 }
 
-.searchbar,
-.searchbar input {
+.searchbar {
 	width: 100%;
+}
+
+.searchbar input {
+	padding: 8px;
+	width: 100%;
+	border: 1px solid grey;
+	box-shadow: none;
 }
