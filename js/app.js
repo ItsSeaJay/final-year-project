@@ -22,7 +22,8 @@ var app = new Vue({
 		initiativeOrder: [],
 		activeCombatant: 0,
 		turn: 0,
-		activeTab: 1
+		activeTab: 1,
+		newCharacterForm: false
 	},
 	components: {
 		'initiative-order': {
@@ -75,6 +76,19 @@ var app = new Vue({
 					v-on:click="$emit('begin-combat')">
 						Confirm
 					</button>
+				</div>
+			`
+		},
+		'new-character-form': {
+			props: [
+				'character'
+			],
+			template: `
+				<div class="container">
+					<form>
+						<label for="name">Name</label>
+						<input type="text" name="name" />
+					</form>
 				</div>
 			`
 		}

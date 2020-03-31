@@ -76,3 +76,24 @@ li {
 	overflow: scroll;
 	max-height: 100vh;
 }
+
+#initiative table {
+	padding: 8px;
+}
+
+#initiative thead {
+	border: 1px solid lightgrey;
+}
+
+#initiative thead th {
+	padding: 8px;
+}
+
+#initiative tbody td {
+	padding: 8px;
+}
+
+.searchbar,
+.searchbar input {
+	width: 100%;
+}

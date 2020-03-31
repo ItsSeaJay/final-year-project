@@ -41,6 +41,11 @@
 								End Encounter
 							</button>
 						</li>
+						<li>
+							<button type="button" v-on:click="initiativeOrder = []">
+								Clear Combatants
+							</button>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -49,6 +54,9 @@
 					<a v-on:click="activeTab = 1" v-bind:class="[ activeTab === 1 ? 'active' : '' ]">Creatures</a>
 					<a v-on:click="activeTab = 2" v-bind:class="[ activeTab === 2 ? 'active' : '' ]">Characters</a>
 					<a v-on:click="activeTab = 3" v-bind:class="[ activeTab === 3 ? 'active' : '' ]">Encounters</a>
+				</div>
+				<div class="searchbar">
+					<input id="search" type="text" name="search">
 				</div>
 				<div class="content">
 					<div v-if="activeTab === 1" class="tab-content">
@@ -60,10 +68,10 @@
 						</ul>
 					</div>
 					<div v-if="activeTab === 2" class="tab-content">
-						<button type="button">Create Character</button>
+						<button type="button" v-on:click="newCharacterForm = !newCharacterForm">Create Character</button>
 
 						<ul>
-							<li v-for="(index, character) in 12"></li>
+							<li v-for="(index, character) in 0">{{ character.name }}</li>
 						</ul>
 					</div>
 					<div v-if="activeTab === 3" class="tab-content">
@@ -71,6 +79,7 @@
 					</div>
 				</div>
 			</div>
+			<new-character-form v-if=""></new-character-form>
 			<div id="initiative">
 				<initiative-order :data="initiativeOrder"></initiative-order>
 				<initiative-modal
