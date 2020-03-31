@@ -88,6 +88,19 @@ var app = new Vue({
 					<form>
 						<label for="name">Name</label>
 						<input type="text" name="name" />
+						<br>
+						<label for="size">Size</label>
+						<select name="size" id="size">
+							<option value="fine">Fine</option>
+							<option value="diminutive">Diminutive</option>
+							<option value="Tiny">Tiny</option>
+							<option value="small">Small</option>
+							<option value="Medium">Medium</option>
+							<option value="large">Large</option>
+							<option value="huge">Huge</option>
+							<option value="gargantuan">Gargantuan</option>
+							<option value="colossal">Colossal</option>
+						</select>
 					</form>
 				</div>
 			`
