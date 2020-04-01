@@ -91,12 +91,12 @@ var app = new Vue({
 			],
 			template: `
 				<div>
-					<form @submit.prevent="$emit('submit')">
+					<form @submit.prevent="onSubmit">
 						<label for="name">Name</label>
-						<input type="text" name="name" placeholder="Drizzt" v-model="character.name" />
+						<input type="text" name="name" v-model="character.name" />
 						<br>
 						<label for="type">Type</label>
-						<input type="text" name="type" placeholder="Dark Elf Ranger" v-model="character.name" />
+						<input type="text" name="type" v-model="character.type" />
 						<br>
 						<label for="size">Size</label>
 						<select name="size" id="size" select="medium">
@@ -106,7 +106,7 @@ var app = new Vue({
 						</select>
 						<br>
 						<label for="level">Level</label>
-						<input type="text" name="level" placeholder="Ranger 1" />
+						<input type="text" name="level" placeholder="" />
 						<br>
 						<label for="hit_points">Hit Points</label>
 						<input type="number" name="hit_points" value="1" />
@@ -128,7 +128,29 @@ var app = new Vue({
 						</button>
 					</form>
 				</div>
-			`
+			`,
+			data: function () {
+				return {
+					character: {
+						name: '',
+						type: '',
+						size: '',
+						hitpoints: 1,
+						armor_class: 10,
+						strength: 10,
+						dexterity: 10,
+						constitution: 10,
+						intelligence: 10,
+						wisdom: 10,
+						charisma: 10
+					}
+				}
+			},
+			methods: {
+				onSubmit: function(event) {
+					console.log(this.character);
+				}
+			}
 		}
 	},
 	methods: {
@@ -196,9 +218,6 @@ var app = new Vue({
 			console.log(this.turn);
 		},
 		getActive: function (event) {
-			console.log(event);
-		},
-		submitNewCharacter: function (event) {
 			console.log(event);
 		}
 	},
