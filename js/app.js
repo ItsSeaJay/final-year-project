@@ -19,6 +19,7 @@ var app = new Vue({
 	data: {
 		state: states.normal,
 		creatures: [],
+		characters: [],
 		initiativeOrder: [],
 		activeCombatant: 0,
 		turn: 0,
@@ -71,6 +72,11 @@ var app = new Vue({
 							v-on:input="$emit('updateinitiative', $event)">
 						</li>
 					</ul>
+					<select name="surprise" id="surprise">
+						<option value="none">None</option>
+						<option value="party">Party</option>
+						<option value="enemy">Enemy></option>
+					</select>
 					<button
 					type="button"
 					v-on:click="$emit('begin-combat')">
@@ -84,23 +90,44 @@ var app = new Vue({
 				'character'
 			],
 			template: `
-				<div class="container">
+				<div>
 					<form>
 						<label for="name">Name</label>
-						<input type="text" name="name" />
+						<input type="text" name="name" placeholder="Drizzt" />
+						<br>
+						<label for="type">Type</label>
+						<input type="text" name="type" placeholder="Dark Elf Ranger" />
 						<br>
 						<label for="size">Size</label>
-						<select name="size" id="size">
-							<option value="fine">Fine</option>
-							<option value="diminutive">Diminutive</option>
-							<option value="Tiny">Tiny</option>
+						<select name="size" id="size" select="medium">
 							<option value="small">Small</option>
 							<option value="Medium">Medium</option>
 							<option value="large">Large</option>
-							<option value="huge">Huge</option>
-							<option value="gargantuan">Gargantuan</option>
-							<option value="colossal">Colossal</option>
 						</select>
+						<br>
+						<label for="level">Level</label>
+						<input type="text" name="level" placeholder="Ranger 1" />
+						<br>
+						<label for="hit_points">Hit Points</label>
+						<input type="number" name="hit_points" value="1" />
+						<input type="text" name="hit_dice" value="1d1+0" />
+						<br>
+						<label for="armor_class">Armor Class</label>
+						<input type="number" name="armor_class" value="10" />
+						<br>
+						<input type="number" name="strength" value="10" />
+						<input type="number" name="dexterity" value="10" />
+						<input type="number" name="constitution" value="10" />
+						<input type="number" name="intelligence" value="10" />
+						<input type="number" name="wisdom" value="10" />
+						<input type="number" name="charisma" value="10" />
+						<br>
+						<button type="button" v-on:click="submitNewCharacter($event)">
+							
+						</button>
+						<button type="button" v-on:click="newCharacterForm = false">
+							Cancel
+						</button>
 					</form>
 				</div>
 			`
@@ -171,6 +198,9 @@ var app = new Vue({
 			console.log(this.turn);
 		},
 		getActive: function (event) {
+			console.log(event);
+		},
+		submitNewCharacter: function (event) {
 			console.log(event);
 		}
 	},
