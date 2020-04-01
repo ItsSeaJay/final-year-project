@@ -84,7 +84,11 @@
 					</div>
 				</div>
 			</div>
-			<new-character-form id="new-character-form" v-if="newCharacterForm"></new-character-form>
+			<new-character-form
+			id="new-character-form"
+			v-if="newCharacterForm"
+			v-on:submit="submitNewCharacter($event)">
+			</new-character-form>
 			<div id="initiative" v-if="!newCharacterForm">
 				<initiative-order :data="initiativeOrder"></initiative-order>
 				<initiative-modal

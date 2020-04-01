@@ -91,12 +91,12 @@ var app = new Vue({
 			],
 			template: `
 				<div>
-					<form>
+					<form @submit.prevent="$emit('submit')">
 						<label for="name">Name</label>
-						<input type="text" name="name" placeholder="Drizzt" />
+						<input type="text" name="name" placeholder="Drizzt" v-model="character.name" />
 						<br>
 						<label for="type">Type</label>
-						<input type="text" name="type" placeholder="Dark Elf Ranger" />
+						<input type="text" name="type" placeholder="Dark Elf Ranger" v-model="character.name" />
 						<br>
 						<label for="size">Size</label>
 						<select name="size" id="size" select="medium">
@@ -122,9 +122,7 @@ var app = new Vue({
 						<input type="number" name="wisdom" value="10" />
 						<input type="number" name="charisma" value="10" />
 						<br>
-						<button type="button" v-on:click="submitNewCharacter($event)">
-							
-						</button>
+						<input type="submit" value="Submit" />
 						<button type="button" v-on:click="newCharacterForm = false">
 							Cancel
 						</button>
