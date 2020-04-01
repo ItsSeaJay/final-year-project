@@ -122,7 +122,7 @@ var app = new Vue({
 						<input type="number" name="wisdom" value="10" v-model="character.wisdom" />
 						<input type="number" name="charisma" value="10" v-model="character.charisma" />
 						<br>
-						<input type="submit" value="Submit" />
+						<input type="submit" value="Submit" v-on:click="newCharacterForm = false" />
 						<button type="button" v-on:click="newCharacterForm = false">
 							Cancel
 						</button>
@@ -150,6 +150,18 @@ var app = new Vue({
 			methods: {
 				onSubmit: function(event) {
 					console.log(this.character);
+
+					var request = window.indexedDB.transaction(["character"], "readwrite")
+						.objectStore("character")
+						.add(this.character);
+
+					request.onsuccess = function (event) {
+						console.log('Added ' + this.character.name + ' to database');
+					}
+
+					request.onfailure = function (event) {
+						console.log('IndexedDB request failed');
+					}
 				}
 			}
 		}
