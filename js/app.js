@@ -99,28 +99,28 @@ var app = new Vue({
 						<input type="text" name="type" v-model="character.type" />
 						<br>
 						<label for="size">Size</label>
-						<select name="size" id="size" select="medium">
+						<select name="size" id="size" select="medium" v-model="character.size">
 							<option value="small">Small</option>
 							<option value="Medium">Medium</option>
 							<option value="large">Large</option>
 						</select>
 						<br>
 						<label for="level">Level</label>
-						<input type="text" name="level" placeholder="" />
+						<input type="text" name="level" v-model="character.level" />
 						<br>
 						<label for="hit_points">Hit Points</label>
-						<input type="number" name="hit_points" value="1" />
-						<input type="text" name="hit_dice" value="1d1+0" />
+						<input type="number" name="hit_points" value="1" v-model="character.hit_points" />
+						<input type="text" name="hit_dice" value="1d1+0" v-model="character.hit_dice" />
 						<br>
 						<label for="armor_class">Armor Class</label>
 						<input type="number" name="armor_class" value="10" />
 						<br>
-						<input type="number" name="strength" value="10" />
-						<input type="number" name="dexterity" value="10" />
-						<input type="number" name="constitution" value="10" />
-						<input type="number" name="intelligence" value="10" />
-						<input type="number" name="wisdom" value="10" />
-						<input type="number" name="charisma" value="10" />
+						<input type="number" name="strength" value="10" v-model="character.strength" />
+						<input type="number" name="dexterity" value="10" v-model="character.dexterity" />
+						<input type="number" name="constitution" value="10" v-model="character.constitution" />
+						<input type="number" name="intelligence" value="10" v-model="character.intelligence" />
+						<input type="number" name="wisdom" value="10" v-model="character.wisdom" />
+						<input type="number" name="charisma" value="10" v-model="character.charisma" />
 						<br>
 						<input type="submit" value="Submit" />
 						<button type="button" v-on:click="newCharacterForm = false">
@@ -135,7 +135,8 @@ var app = new Vue({
 						name: '',
 						type: '',
 						size: '',
-						hitpoints: 1,
+						hit_points: 1,
+						hit_dice: '',
 						armor_class: 10,
 						strength: 10,
 						dexterity: 10,
