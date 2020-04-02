@@ -24,7 +24,8 @@ var app = new Vue({
 		activeCombatant: 0,
 		turn: 0,
 		activeTab: 1,
-		newCharacterForm: false
+		newCharacterForm: false,
+		hideSidebar: false
 	},
 	components: {
 		'initiative-order': {

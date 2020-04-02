@@ -12,7 +12,6 @@
 
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/boilerplate.css">
 
 		<meta name="theme-color" content="#160a0b">
 	</head>
@@ -23,6 +22,55 @@
 		<![endif]-->
 
 		<main id="app">
+			<div id="sidebar">
+				<ul>
+					<li v-if="state === 0">
+						<button type="button" title="Begin Encounter" v-on:click="setupEncounter($event)">
+							<img src="img/sidebar/play-button.png" alt="Play Icon" width="24px" height="24px">
+						</button>
+					</li>
+					<li v-if="state == 2">
+						<button type="button" title="End Encounter" v-on:click="state = 0">
+							<img src="img/sidebar/pause-button.png" alt="Pause Icon" width="24px" height="24px">
+						</button>
+					</li>
+					<li v-if="state == 2">
+						<button type="button" title="Advance Turn" v-on:click="advanceTurn($event)">
+							<img src="img/sidebar/fast-forward-button.png" alt="Fast-Forward Icon" width="24px" height="24px">
+						</button>
+					</li>
+					<li>
+						<button type="button" title="Clean Encounter" v-on:click="initiativeOrder = []">
+							<img src="img/sidebar/large-paint-brush.png" alt="Paint Brush Icon" width="24px" height="24px">
+						</button>
+					</li>
+					<li>
+						<button type="button" title="Save Encounter">
+							<img src="img/sidebar/save.png" alt="Paint Brush Icon" width="24px" height="24px">
+						</button>
+					</li>
+				</ul>
+			</div>
+
+			<div class="container">
+				<div class="column">
+					<div id="initiative">
+						<initiative-order :data="initiativeOrder"></initiative-order>
+						<initiative-modal
+						:data="initiativeOrder"
+						v-on:begin-combat="beginCombat($event)"
+						v-on:updateinitiative="updateInitiative"
+						v-on:getactive="getActive"
+						v-if="state === 1"></initiative-modal>
+					</div>
+				</div>
+				<div class="column">
+					
+				</div>
+			</div>
+		</main>
+
+		<!-- <main id="app">
 			<div class="sidebar">
 				<nav id="commands">
 					<ul>
@@ -97,9 +145,9 @@
 				v-if="state === 1"></initiative-modal>
 			</div>
 		</main>
-
+		
+		<script src="serviceworker.js"></script> -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
-		<script src="serviceworker.js"></script>
-		<script src="js/app.js"></script>
+		<script src="js/app.js"></script> 
 	</body>
 </html>

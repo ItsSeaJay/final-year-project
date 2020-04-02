@@ -1,0 +1,105 @@
+html,
+body {
+	border: 0px;
+	padding: 0px;
+}
+
+main > div {
+	float: left;
+}
+
+.active {
+	background-color: whitesmoke;
+}
+
+.container { 
+	color: #888;
+	overflow: none;
+	max-height: 90%;
+}
+
+/* Style the tabs */
+.tabs {
+	overflow: hidden;
+}
+
+.tabs ul {
+	list-style-type: none;
+	margin-left: 20px;
+}
+
+nav ul {
+	padding: 0px;
+	border: 0px;
+}
+
+li {
+	list-style: none;
+	padding: 8px;
+}
+
+.tab-content li:hover {
+	background-color: lightgrey;
+}
+
+.tabs a {
+	float: left;
+	cursor: pointer;
+	padding: 12px 24px;
+	transition: background-color 0.2s;
+	border: 1px solid #ccc;
+	border-right: none;
+	background-color: #f1f1f1;
+	font-weight: bold;
+}
+.tabs a:last-child { 
+	border-right: 1px solid #ccc;
+}
+
+/* Change background color of tabs on hover */
+.tabs a:hover {
+	background-color: #aaa;
+	color: #fff;
+}
+
+/* Styling for active tab */
+.tabs a.active {
+	background-color: #fff;
+	color: #484848;
+	border-bottom: 2px solid #fff;
+	cursor: default;
+}
+
+/* Style the tab content */
+.tab-content {
+	border: 1px solid #ccc;
+	overflow: scroll;
+	max-height: 100vh;
+}
+
+#initiative table {
+	padding: 8px;
+}
+
+#initiative thead {
+	border: 1px solid lightgrey;
+}
+
+#initiative thead th {
+	padding: 8px;
+}
+
+#initiative tbody td {
+	padding: 8px;
+}
+
+.searchbar {
+	width: 100%;
+}
+
+.searchbar input {
+	padding: 8px;
+	width: 100%;
+	border: 1px solid grey;
+	box-shadow: none;
+}

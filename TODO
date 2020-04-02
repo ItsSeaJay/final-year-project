@@ -1,0 +1,16 @@
+- Ensure character data from user is valid
+- Make sure that all user input is safe (no XSS)
+- Commit character data to local storage
+- Add hidden field for character ID number
+- Demonstrate asynchronous data upload
+- Allow CRUD for encounters
+- Reference Improved Initiative
+- Style every element with CSS
+- Investigate mediocre accessibility scores within Lighthouse
+
+- Look into remote uploading for final deliverable
+- Contact university about Coronavirus (Penny first, then computing@shu.ac.uk)
+
+PRIORITISE THE REPORT
+
+include a testing strategy in the report
