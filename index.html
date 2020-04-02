@@ -54,6 +54,38 @@
 
 			<div class="container">
 				<div class="column">
+					<div id="library">
+				<div class="tabs">
+					<a v-on:click="activeTab = 1" v-bind:class="[ activeTab === 1 ? 'active' : '' ]">Creatures</a>
+					<a v-on:click="activeTab = 2" v-bind:class="[ activeTab === 2 ? 'active' : '' ]">Characters</a>
+					<a v-on:click="activeTab = 3" v-bind:class="[ activeTab === 3 ? 'active' : '' ]">Encounters</a>
+				</div>
+				<div class="searchbar">
+					<input id="search" type="text" name="search">
+				</div>
+				<div class="tab-body">
+					<div v-if="activeTab === 1" class="tab-content">
+						<ul>
+							<creature-listing
+							v-for="(index, creature) in creatures"
+							v-bind:creature="creature"
+							v-on:click="addCreature(index)"></creature-listing>
+						</ul>
+					</div>
+					<div v-if="activeTab === 2" class="tab-content">
+						<button type="button" v-on:click="newCharacterForm = !newCharacterForm">Create Character</button>
+
+						<ul>
+							<li v-for="(index, character) in 0">{{ character.name }}</li>
+						</ul>
+					</div>
+					<div v-if="activeTab === 3" class="tab-content">
+						<p>Encounters</p>
+					</div>
+				</div>
+			</div>
+				</div>
+				<div class="column">
 					<div id="initiative">
 						<initiative-order :data="initiativeOrder"></initiative-order>
 						<initiative-modal

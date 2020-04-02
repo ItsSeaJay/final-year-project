@@ -192,7 +192,7 @@ body {
 }
 
 body {
-  background-color: magenta;
+  background-color: #FAFAFA;
 }
 
 main#app {
@@ -252,10 +252,49 @@ main#app {
   position: relative;
   margin: 0 auto;
   width: 80%;
+  max-height: 100vh;
   box-sizing: border-box;
 }
+
 .column {
   float: left;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.tabs {
+  overflow: hidden;
+}
+
+.tabs ul {
+  list-style: none;
+  margin-left: 24px;
+}
+
+.tabs a {
+  float: left;
+  cursor: pointer;
+  padding: 12px 24px;
+  transition: background-color 0.2s;
+  border: 0px;
+  background-color: whitesmoke;
+  font-weight: bold;
+}
+
+.tabs a:hover {
+  background-color: lightgrey;
+}
+
+.tabs a.active {
+  background-color: crimson;
+  color: white;
+  cursor: default;
+}
+
+.tab-content {
+  border: 1px solid grey;
+  height: 100%;
+  overflow: scroll;
 }
 
 /* ==========================================================================
@@ -266,9 +305,8 @@ main#app {
 
 @media only screen and (min-width: 35em) {
   /* Style adjustments for viewports that meet the condition */
-  #sidebar p {
-    display: block;
-    visibility: visible;
+  .column {
+    clear: both;
   }
 }
 
