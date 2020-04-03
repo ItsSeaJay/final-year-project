@@ -204,7 +204,7 @@ main#app {
   */
 #sidebar {
   height: 100%;
-  width: 96px;
+  width: 64px;
 
   background-color: black;
   color: white;
@@ -248,17 +248,23 @@ main#app {
 .container {
   float: left;
   position: relative;
+
   width: 100%;
   height: 100%;
+
   box-sizing: border-box;
-  background-color: red;
+  background-color: #FAFAFA;
+
+  padding-left: 64px;
 }
 
 .column {
   float: left;
-  width: 10%;
+  width: 100%;
+  max-width: 50%;
   box-sizing: border-box;
   position: relative;
+  background-color: white;
 }
 
 .tabs {
@@ -293,6 +299,14 @@ main#app {
 .tab-content {
   border: 1px solid grey;
   overflow: scroll;
+  max-height: 66vh;
+}
+
+#searchbar {
+  width: 100%;
+  border: 1px solid grey;
+  padding: 8px;
+  overflow: hidden;
 }
 
 /* ==========================================================================
