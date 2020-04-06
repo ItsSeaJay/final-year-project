@@ -85,6 +85,9 @@
 				</div>
 				<div class="column">
 					<initiative-order id="initiative" :data="initiativeOrder"></initiative-order>
+					<span v-if="initiativeOrder.length === 0">
+						<em>No combatants available. Try adding some<em>
+					</span>
 					<initiative-modal
 					:data="initiativeOrder"
 					v-on:begin-combat="beginCombat($event)"

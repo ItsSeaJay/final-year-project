@@ -119,7 +119,7 @@ var app = new Vue({
 						<input type="number" name="charisma" value="10" v-model="character.charisma" />
 						<br>
 						<input type="submit" value="Submit" />
-						<button type="button" v-on:click="newCharacterForm = false">
+						<button type="button" v-on:click="$parent.newCharacterForm = false">
 							Cancel
 						</button>
 					</form>
