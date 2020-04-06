@@ -327,6 +327,27 @@ main#app {
   box-sizing: border-box;
 }
 
+#initiative {
+  width: 100%;
+  margin: 0px;
+  border-spacing: 0;
+}
+
+#initiative thead {
+  background-color: black;
+  color: white;
+}
+
+#initiative thead th {
+  padding: 8px;
+  margin: 0px;
+}
+
+#initiative tbody td {
+  padding: 8px;
+  margin: 0px;
+}
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.

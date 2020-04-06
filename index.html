@@ -53,7 +53,7 @@
 			</div>
 
 			<div class="container">
-				<div class="column four">
+				<div class="column">
 					<div class="tabs">
 						<a v-on:click="activeTab = 1" v-bind:class="[ activeTab === 1 ? 'active' : '' ]">Creatures</a>
 						<a v-on:click="activeTab = 2" v-bind:class="[ activeTab === 2 ? 'active' : '' ]">Characters</a>
@@ -75,7 +75,7 @@
 							<button type="button" v-on:click="newCharacterForm = !newCharacterForm">Create Character</button>
 
 							<ul>
-								<li v-for="(index, character) in 0">{{ character.name }}</li>
+								<li v-for="(index, character) in characters" v-on:click="addCharacter(index)">{{ character.name }}</li>
 							</ul>
 						</div>
 						<div v-if="activeTab === 3" class="tab-content">
@@ -83,8 +83,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="column eight">
-					<initiative-order :data="initiativeOrder"></initiative-order>
+				<div class="column">
+					<initiative-order id="initiative" :data="initiativeOrder"></initiative-order>
 					<initiative-modal
 					:data="initiativeOrder"
 					v-on:begin-combat="beginCombat($event)"
