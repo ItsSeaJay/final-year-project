@@ -60,13 +60,13 @@
 						<a v-on:click="activeTab = 3" v-bind:class="[ activeTab === 3 ? 'active' : '' ]">Encounters</a>
 					</div>
 					<div class="searchbar">
-						<input id="searchbar" type="text" name="search">
+						<input id="searchbar" type="text" name="search" label="searchbar">
 					</div>
 					<div class="content">
 						<div v-if="activeTab === 1" class="tab-content">
 							<ul>
 								<creature-listing
-								v-for="(index, creature) in creatures"
+								v-for="(creature, index) in creatures"
 								v-bind:creature="creature"
 								v-on:click="addCreature(index)"></creature-listing>
 							</ul>
@@ -75,7 +75,7 @@
 							<button type="button" v-on:click="newCharacterForm = !newCharacterForm">Create Character</button>
 
 							<ul>
-								<li v-for="(index, character) in characters" v-on:click="addCharacter(index)">{{ character.name }}</li>
+								<li v-for="(character, index) in characters" v-on:click="addCharacter(index)">{{ character.name }}</li>
 							</ul>
 						</div>
 						<div v-if="activeTab === 3" class="tab-content">
@@ -86,7 +86,7 @@
 				<div class="column">
 					<initiative-order id="initiative" :data="initiativeOrder"></initiative-order>
 					<span v-if="initiativeOrder.length === 0">
-						<em>No combatants available. Try adding some<em>
+						<em>No combatants available. Try adding some!</em>
 					</span>
 					<initiative-modal
 					:data="initiativeOrder"
@@ -102,7 +102,7 @@
 		</main>
 		
 		<!-- <script src="serviceworker.js"></script> -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="js/app.js"></script> 
 	</body>
 </html>

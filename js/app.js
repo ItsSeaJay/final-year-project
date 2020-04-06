@@ -1,12 +1,12 @@
-Vue.component(
-	'creature-listing',
-	{
-		props: [
-			'creature'
-		],
-		template: '<li>{{ creature.name }}</li>'
-	}
-);
+// Vue.component(
+// 	'creature-listing',
+// 	{
+// 		props: [
+// 			'creature'
+// 		],
+// 		template: '<li>{{ creature.name }}</li>'
+// 	}
+// );
 
 const states = {
 	normal: 0,
@@ -28,6 +28,14 @@ var app = new Vue({
 		hideSidebar: false
 	},
 	components: {
+		'creature-listing': {
+			props: [
+				'creature'
+			],
+			template: `
+				<li>{{ creature.name }}</li>
+			`
+		},
 		'initiative-order': {
 			props: [
 				'data'
