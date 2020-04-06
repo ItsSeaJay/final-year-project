@@ -253,7 +253,7 @@ main#app {
   height: 100%;
 
   box-sizing: border-box;
-  background-color: #FAFAFA;
+  background-color: #FAFAFA; /* Pale Grey */
 
   padding-left: 64px;
 }
@@ -261,10 +261,11 @@ main#app {
 .column {
   float: left;
   width: 100%;
+  height: 100%;
   max-width: 50%;
   box-sizing: border-box;
   position: relative;
-  background-color: white;
+  padding: 24px;
 }
 
 .tabs {
@@ -299,7 +300,23 @@ main#app {
 .tab-content {
   border: 1px solid grey;
   overflow: scroll;
-  max-height: 66vh;
+  height: 100%;
+  max-height: 80vh;
+}
+
+.tab-content ul {
+  padding: 16px;
+  margin: 0px auto;
+}
+
+.tab-content li {
+  list-style: none;
+  padding: 8px;
+}
+
+.tab-content li:hover {
+  background-color: lightgrey;
+  font-weight: bold;
 }
 
 #searchbar {

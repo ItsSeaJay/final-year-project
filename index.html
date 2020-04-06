@@ -53,7 +53,7 @@
 			</div>
 
 			<div class="container">
-				<div class="column">
+				<div class="column four">
 					<div class="tabs">
 						<a v-on:click="activeTab = 1" v-bind:class="[ activeTab === 1 ? 'active' : '' ]">Creatures</a>
 						<a v-on:click="activeTab = 2" v-bind:class="[ activeTab === 2 ? 'active' : '' ]">Characters</a>
@@ -83,7 +83,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="column">
+				<div class="column eight">
 					<initiative-order :data="initiativeOrder"></initiative-order>
 					<initiative-modal
 					:data="initiativeOrder"
