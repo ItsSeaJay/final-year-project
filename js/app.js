@@ -44,7 +44,7 @@ var app = new Vue({
                         </tr>
                     </thead>
                     <tbody>
-						<tr v-for="(index, combatant) in data" v-bind:class="{ active: index }">
+						<tr v-for="(index, combatant) in data">
 							<td>{{ index }}</td>
 							<td>{{ combatant.initiative_score }}</td>
 							<td>{{ combatant.name }}</td>

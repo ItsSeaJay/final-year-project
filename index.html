@@ -93,7 +93,7 @@
 					v-if="state === 1 && newCharacterForm === false"></initiative-modal>
 					<new-character-form
 					id="new-character-form"
-					v-if="newCharacterForm === true"></new-character-form>
+					v-if="newCharacterForm === true && state === 0"></new-character-form>
 				</div>
 			</div>
 		</main>
