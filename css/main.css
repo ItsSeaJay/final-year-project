@@ -307,6 +307,7 @@ main#app {
   border: 1px solid grey;
   padding: 8px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* ==========================================================================
