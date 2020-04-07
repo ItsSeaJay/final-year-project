@@ -23,7 +23,7 @@ var app = new Vue({
 				'creature'
 			],
 			template: `
-				<li v-on:click="$emit('click')">{{ creature.name }}</li>
+				<li>{{ creature.name }}</li>
 			`
 		},
 		'initiative-order': {
@@ -55,13 +55,13 @@ var app = new Vue({
 		},
 		'initiative-modal': {
 			props: [
-				'data'
+				'combatants'
 			],
 			template: `
 				<div class="modal">
 					<h2>Initiative Rolls</h2>
 
-					<ul v-for="(index, combatant) in data">
+					<ul v-for="(combatant, index) in combatants">
 						<li>
 							<span>{{ index }} - {{ combatant.name }}</span>
 							<input
