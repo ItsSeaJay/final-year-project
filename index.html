@@ -68,6 +68,7 @@
 								<creature-listing
 								v-for="(creature, index) in creatures"
 								v-bind:creature="creature"
+								v-bind:key="creature.id"
 								v-on:click="addCreature(index)"></creature-listing>
 							</ul>
 						</div>
@@ -84,15 +85,14 @@
 					</div>
 				</div>
 				<div class="column">
-					<initiative-order id="initiative" :data="initiativeOrder"></initiative-order>
+					<initiative-order id="initiative" v-bind:combatants="initiativeOrder"></initiative-order>
 					<span v-if="initiativeOrder.length === 0">
 						<em>No combatants available. Try adding some!</em>
 					</span>
 					<initiative-modal
-					:data="initiativeOrder"
+					v-bind:data="initiativeOrder"
 					v-on:begin-combat="beginCombat($event)"
 					v-on:updateinitiative="updateInitiative"
-					v-on:getactive="getActive"
 					v-if="state === 1 && newCharacterForm === false"></initiative-modal>
 					<new-character-form
 					id="new-character-form"

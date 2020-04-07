@@ -1,13 +1,3 @@
-// Vue.component(
-// 	'creature-listing',
-// 	{
-// 		props: [
-// 			'creature'
-// 		],
-// 		template: '<li>{{ creature.name }}</li>'
-// 	}
-// );
-
 const states = {
 	normal: 0,
 	precombat: 1,
@@ -33,12 +23,12 @@ var app = new Vue({
 				'creature'
 			],
 			template: `
-				<li>{{ creature.name }}</li>
+				<li v-on:click="$emit('click')">{{ creature.name }}</li>
 			`
 		},
 		'initiative-order': {
 			props: [
-				'data'
+				'combatants'
 			],
 			template: `
 				<table> 
@@ -52,7 +42,7 @@ var app = new Vue({
                         </tr>
                     </thead>
                     <tbody>
-						<tr v-for="(index, combatant) in data">
+						<tr v-for="(combatant, index) in combatants">
 							<td>{{ index }}</td>
 							<td>{{ combatant.initiative_score }}</td>
 							<td>{{ combatant.name }}</td>
@@ -186,6 +176,8 @@ var app = new Vue({
 
 			// Add this creature to the initiative order
 			this.initiativeOrder.push(nextCombatant);
+
+			console.log(this.initiativeOrder);
 		},
 		addCharacter: function (index) {
 			var clone = JSON.parse(JSON.stringify(this.characters[index]));
@@ -245,11 +237,3 @@ var app = new Vue({
 			.then(creatures => { this.creatures = creatures })
 	}
 });
-
-// Configure IndexedDB
-window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
-if (!window.indexedDB) {
-   window.alert("Your browser doesn't support a stable version of IndexedDB.");
-}
