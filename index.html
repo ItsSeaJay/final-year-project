@@ -73,7 +73,7 @@
 							</ul>
 						</div>
 						<div v-if="activeTab === 2" class="tab-content">
-							<button type="button" v-on:click="newCharacterForm = !newCharacterForm">Create Character</button>
+							<button type="button" v-on:click="newCharacterForm = true">Create Character</button>
 
 							<ul>
 								<li v-for="(character, index) in characters" v-on:click="addCharacter(index)">{{ character.name }}</li>
@@ -85,7 +85,10 @@
 					</div>
 				</div>
 				<div class="column">
-					<initiative-order id="initiative" v-bind:combatants="initiativeOrder"></initiative-order>
+					<initiative-order
+					id="initiative"
+					v-bind:combatants="initiativeOrder"
+					></initiative-order>
 					<span v-if="initiativeOrder.length === 0">
 						<em>No combatants available. Try adding some!</em>
 					</span>
@@ -95,8 +98,7 @@
 					v-on:updateinitiative="updateInitiative"
 					v-if="state === 1 && newCharacterForm === false"></initiative-modal>
 					<new-character-form
-					id="new-character-form"
-					v-if="newCharacterForm === true && state === 0"></new-character-form>
+					v-if="newCharacterForm === true"></new-character-form>
 				</div>
 			</div>
 		</main>

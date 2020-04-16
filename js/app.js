@@ -2,7 +2,7 @@ const states = {
 	normal: 0,
 	precombat: 1,
 	combat: 2
-}
+};
 
 var app = new Vue({
 	el: '#app',
@@ -68,7 +68,7 @@ var app = new Vue({
 							data-index="{{ index }}"
 							type="number"
 							value="{{ combatant.initiative_score }}"
-							v-on:input="$emit('updateinitiative', $event)">
+							v-on:input.native="$emit('updateinitiative', $event)">
 						</li>
 					</ul>
 					<button
@@ -80,9 +80,6 @@ var app = new Vue({
 			`
 		},
 		'new-character-form': {
-			props: [
-				'character'
-			],
 			template: `
 				<div>
 					<form @submit.prevent="onSubmit">
