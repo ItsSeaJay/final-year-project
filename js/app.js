@@ -143,6 +143,21 @@ var app = new Vue({
 					var clone = JSON.parse(JSON.stringify(this.character));
 
 					this.$parent.characters.push(clone);
+
+					this.character = {
+						name: '',
+						type: '',
+						size: '',
+						hit_points: 1,
+						hit_dice: '',
+						armor_class: 10,
+						strength: 10,
+						dexterity: 10,
+						constitution: 10,
+						intelligence: 10,
+						wisdom: 10,
+						charisma: 10
+					};
 				}
 			}
 		}
