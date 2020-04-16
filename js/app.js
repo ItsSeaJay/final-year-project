@@ -65,10 +65,10 @@ var app = new Vue({
 						<li>
 							<span>{{ index }} - {{ combatant.name }}</span>
 							<input
-							data-index="{{ index }}"
+							:data-index="index"
 							type="number"
-							value="{{ combatant.initiative_score }}"
-							v-on:input.native="$emit('updateinitiative', $event)">
+							:value="combatant.initiative_score"
+							v-on:input="$emit('updateinitiative', $event)">
 						</li>
 					</ul>
 					<button

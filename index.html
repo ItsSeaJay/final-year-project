@@ -88,8 +88,8 @@
 					<initiative-order
 					id="initiative"
 					v-bind:combatants="initiativeOrder"
-					></initiative-order>
-					<span v-if="initiativeOrder.length === 0">
+					v-if="newCharacterForm === false"></initiative-order>
+					<span v-if="initiativeOrder.length === 0 && newCharacterForm === false">
 						<em>No combatants available. Try adding some!</em>
 					</span>
 					<initiative-modal
