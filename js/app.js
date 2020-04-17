@@ -4,7 +4,9 @@ const STATES = {
 	combat: 2
 };
 const DB_NAME = 'final-year-project-battle-tracker';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
+
+var db;
 
 var app = new Vue({
 	el: '#app',
@@ -145,6 +147,9 @@ var app = new Vue({
 			methods: {
 				onSubmit: function(event) {
 					var clone = JSON.parse(JSON.stringify(this.character));
+					var transaction = db.transaction([ 'characters' ], 'readwrite');
+					var objectStore = transaction.objectStore('characters');
+					objectStore.add(clone);
 
 					// Add the clone to the local character data
 					this.$parent.characters.push(clone);
@@ -168,18 +173,6 @@ var app = new Vue({
 		}
 	},
 	methods: {
-		openDatabase: function (name) {
-			var db = event.target.result;
-			var request = IndexedDB.open(name);
-			request.onsuccess = function (event) {
-				db = event.target.result;
-			};
-			request.onerror = function (event) {
-				console.error(event.target.error);
-			};
-
-			return db;
-		},
 		rollInitiative: function(creature) {
 			// Calculate the initiative bonus based on the target's
 			// dexterity score
@@ -260,39 +253,57 @@ var app = new Vue({
 		}
 	},
 	created: function () {
-		var db;
 		var request = window.indexedDB.open(DB_NAME, DB_VERSION);
 		request.onupgradeneeded = function (event) {
 			db = event.target.result;
 
-			var objectStores = {
-				characters: db.createObjectStore('characters', { autoIncrement: true })
-			};
+			if (event.target.transaction.objectStore('characters') === null) {
+				var objectStores = {
+					characters: db.createObjectStore('characters', { autoIncrement: true })
+				};
 
-			objectStores.characters.createIndex('name', 'name');
+				objectStores.characters.createIndex('name', 'name', { unique: false });
+				objectStores.characters.createIndex('type', 'type', { unique: false });
+				objectStores.characters.createIndex('size', 'size', { unique: false });
+				objectStores.characters.createIndex('hit_points', 'hit_points', { unique: false });
+				objectStores.characters.createIndex('armor_class', 'armor_class', { unique: false });
+				objectStores.characters.createIndex('strength', 'strength', { unique: false });
+				objectStores.characters.createIndex('dexterity', 'dexterity', { unique: false });
+				objectStores.characters.createIndex('constitution', 'constitution', { unique: false });
+				objectStores.characters.createIndex('intelligence', 'intelligence', { unique: false });
+				objectStores.characters.createIndex('wisdom', 'wisdom', { unique: false });
+				objectStores.characters.createIndex('charisma', 'charisma', { unique: false });
+			}
+
 			objectStores.characters.add({
-				name: 'Murphy Pendleton'
+				name: 'Example',
+				type: '',
+				size: '',
+				hit_points: 10,
+				hit_dice: '',
+				armor_class: 10,
+				strength: 10,
+				dexterity: 10,
+				constitution: 10,
+				intelligence: 10,
+				wisdom: 10,
+				charisma: 10,
 			});
 		};
 		request.onsuccess = function (event) {
 			db = event.target.result;
 
 			var objectStores = {
-				characters: db.transaction('characters').objectStore('characters')
+				characters: db.transaction('characters').objectStore('characters'),
+			};
+			var all = {
+				characters: objectStores.characters.getAll(),
 			};
 
-			objectStores.characters.openCursor().onsuccess = function (event) {
-				var cursor = event.target.result;
-
-				if (cursor) {
-					console.log(cursor.value);
-					this.characters.push(JSON.parse(JSON.stringify(cursor.value)));
-					cursor.continue();
-				} else {
-					console.log('No more entries!');
-				}
+			all.characters.onsuccess = function () {
+				console.log(all.characters.result);
 			}
-		}
+		};
 		request.onerror = function (event) {
 			console.error(event.target.error);
 		};
