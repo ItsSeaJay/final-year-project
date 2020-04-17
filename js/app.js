@@ -1,9 +1,10 @@
-
 const STATES = {
 	normal: 0,
 	precombat: 1,
 	combat: 2
 };
+const DB_NAME = 'final-year-project-battle-tracker';
+const DB_VERSION = 1;
 
 var app = new Vue({
 	el: '#app',
@@ -167,6 +168,18 @@ var app = new Vue({
 		}
 	},
 	methods: {
+		openDatabase: function (name) {
+			var db = event.target.result;
+			var request = IndexedDB.open(name);
+			request.onsuccess = function (event) {
+				db = event.target.result;
+			};
+			request.onerror = function (event) {
+				console.error(event.target.error);
+			};
+
+			return db;
+		},
 		rollInitiative: function(creature) {
 			// Calculate the initiative bonus based on the target's
 			// dexterity score
@@ -247,6 +260,43 @@ var app = new Vue({
 		}
 	},
 	created: function () {
+		var db;
+		var request = window.indexedDB.open(DB_NAME, DB_VERSION);
+		request.onupgradeneeded = function (event) {
+			db = event.target.result;
+
+			var objectStores = {
+				characters: db.createObjectStore('characters', { autoIncrement: true })
+			};
+
+			objectStores.characters.createIndex('name', 'name');
+			objectStores.characters.add({
+				name: 'Murphy Pendleton'
+			});
+		};
+		request.onsuccess = function (event) {
+			db = event.target.result;
+
+			var objectStores = {
+				characters: db.transaction('characters').objectStore('characters')
+			};
+
+			objectStores.characters.openCursor().onsuccess = function (event) {
+				var cursor = event.target.result;
+
+				if (cursor) {
+					console.log(cursor.value);
+					this.characters.push(JSON.parse(JSON.stringify(cursor.value)));
+					cursor.continue();
+				} else {
+					console.log('No more entries!');
+				}
+			}
+		}
+		request.onerror = function (event) {
+			console.error(event.target.error);
+		};
+
 		// this runs when the component is mounted
 		fetch("creatures.json")
 			.then(data => data.json())
