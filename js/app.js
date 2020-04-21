@@ -4,6 +4,7 @@ const STATES = {
 	combat: 2
 };
 
+var db;
 var app = new Vue({
 	el: '#app',
 	data: {
@@ -142,11 +143,11 @@ var app = new Vue({
 			},
 			methods: {
 				onSubmit: function(event) {
+					// Make a clone of the current character
 					var clone = JSON.parse(JSON.stringify(this.character));
-					var transaction = db.transaction([ 'characters' ], 'readwrite');
-					var objectStore = transaction.objectStore('characters');
-					objectStore.add(clone);
 
+					// Add the clone to the database
+					db.characters.add(clone);
 					// Add the clone to the local character data
 					this.$parent.characters.push(clone);
 					// Reset the form data
@@ -164,6 +165,8 @@ var app = new Vue({
 						wisdom: 10,
 						charisma: 10
 					};
+					// Close the form dialog
+					this.$parent.newCharacterForm = false;
 				}
 			}
 		}
@@ -249,7 +252,7 @@ var app = new Vue({
 		}
 	},
 	created: function () {
-		var db = new Dexie('final_year_project');
+		db = new Dexie('final_year_project');
 		db.version(1).stores({
 			characters: '++id,name,type,size,hit_points,hit_dice,armor_class,strength,dexterity,constitution,wisdom,charisma'
 		}).upgrade(tx => {
