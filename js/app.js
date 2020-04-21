@@ -249,6 +249,29 @@ var app = new Vue({
 		}
 	},
 	created: function () {
+		var db = new Dexie('final_year_project');
+		db.version(1).stores({
+			characters: '++id,name,type,size,hit_points,hit_dice,armor_class,strength,dexterity,constitution,wisdom,charisma'
+		}).upgrade(tx => {
+			db.characters.add({
+				name: 'Drizzle Dursley',
+				type: 'Dark Elf Ranger',
+				hit_points: 13,
+				hit_dice: '1d10',
+				armor_class: 14,
+				strength: 13,
+				dexterity: 17,
+				constitution: 12,
+				intelligence: 10,
+				wisdom: 14,
+				charisma: 9,
+			});
+		});
+		db.open();
+		db.characters.toArray().then(characters => {
+			this.characters = characters
+		});
+
 		// this runs when the component is mounted
 		fetch("creatures.json")
 			.then(data => data.json())
