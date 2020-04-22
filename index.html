@@ -77,7 +77,14 @@
 							<button type="button" v-on:click="newCharacterForm = true">Create Character</button>
 
 							<ul>
-								<li v-for="(character, index) in characters" v-on:click="addCharacter(index)">{{ character.name }}</li>
+								<li
+								v-for="(character, index) in characters">
+									<span v-on:click="addCharacter(index)">{{ character.name }}<span>
+									<span>
+										<button v-on:click="">Edit</button>
+										<button v-on:click="">Delete</button>
+									</span>
+								</li>
 							</ul>
 						</div>
 						<div v-if="activeTab === 3" class="tab-content">

@@ -304,6 +304,10 @@ main#app {
   max-height: 80vh;
 }
 
+.tab-content > button {
+  background-color: red;
+}
+
 .tab-content ul {
   padding: 16px;
   margin: 0px auto;

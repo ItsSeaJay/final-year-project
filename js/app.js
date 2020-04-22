@@ -238,8 +238,6 @@ var app = new Vue({
 			this.initiativeOrder.sort(function (first, second) {
 				return first.initiative_score > second.initiative_score;
 			});
-
-			console.log(this.initiativeOrder);
 		},
 		advanceTurn: function (event) {
 			this.turn += 1;
@@ -254,20 +252,6 @@ var app = new Vue({
 		db = new Dexie('final_year_project');
 		db.version(1).stores({
 			characters: '++id,name,type,size,hit_points,hit_dice,armor_class,strength,dexterity,constitution,wisdom,charisma'
-		}).upgrade(tx => {
-			db.characters.add({
-				name: 'Drizzle Dursley',
-				type: 'Dark Elf Ranger',
-				hit_points: 13,
-				hit_dice: '1d10',
-				armor_class: 14,
-				strength: 13,
-				dexterity: 17,
-				constitution: 12,
-				intelligence: 10,
-				wisdom: 14,
-				charisma: 9,
-			});
 		});
 		db.open();
 		db.characters.toArray().then(characters => {
