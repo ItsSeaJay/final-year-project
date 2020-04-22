@@ -45,7 +45,7 @@
 						</button>
 					</li>
 					<li>
-						<button type="button" title="Save Encounter">
+						<button type="button" title="Save Encounter" v-on:click="saveEncounter($event)">
 							<img src="img/sidebar/save.png" alt="Paint Brush Icon" width="24px" height="24px">
 						</button>
 					</li>
@@ -78,17 +78,20 @@
 
 							<ul>
 								<li
-								v-for="(character, index) in characters">
-									<span v-on:click="addCharacter(index)">{{ character.name }}<span>
-									<span>
-										<button v-on:click="">Edit</button>
-										<button v-on:click="">Delete</button>
-									</span>
+								v-for="(character, index) in characters"
+								v-on:click="addCharacter(index)">
+									{{ character.name }}
 								</li>
 							</ul>
 						</div>
 						<div v-if="activeTab === 3" class="tab-content">
-							<p>Encounters</p>
+							<ul>
+								<li
+								v-for="(encounter, index) in encounters"
+								v-on:click="loadEncounter(index)">
+									{{ encounter.name }}
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>

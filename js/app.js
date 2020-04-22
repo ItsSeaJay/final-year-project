@@ -11,6 +11,7 @@ var app = new Vue({
 		state: STATES.normal,
 		creatures: [],
 		characters: [],
+		encounters: [],
 		initiativeOrder: [],
 		activeCombatant: 0,
 		turn: 0,
@@ -231,6 +232,26 @@ var app = new Vue({
 		cancelEncounter: function (event) {
 			this.state = STATES.normal;
 		},
+		saveEncounter: function (event) {
+			var currentDate = new Date();
+			var name = currentDate.getDate() + "/"
+                + (currentDate.getMonth() + 1)  + "/" 
+                + currentDate.getFullYear() + " @ "  
+                + currentDate.getHours() + ":"  
+                + currentDate.getMinutes() + ":" 
+                + currentDate.getSeconds();
+            var combatants = this.initiative_order;
+            var encounter = {
+            	name: name,
+            	combatants: combatants,
+            };
+
+			db.encounters.add(encounter);
+			this.encounters.push(encounter);
+		},
+		loadEncounter: function (index) {
+			this.initiative_order = this.encounters[index].combatants;
+		},
 		beginCombat: function (event) {
 			this.state = STATES.combat;
 
@@ -250,15 +271,19 @@ var app = new Vue({
 	created: function () {
 		// Configure the database
 		db = new Dexie('final_year_project');
-		db.version(1).stores({
-			characters: '++id,name,type,size,hit_points,hit_dice,armor_class,strength,dexterity,constitution,wisdom,charisma'
+		db.version(3).stores({
+			characters: '++id,name,type,size,hit_points,hit_dice,armor_class,strength,dexterity,constitution,wisdom,charisma',
+			encounters: '++id,name,combatants'
 		});
 		db.open();
 		db.characters.toArray().then(characters => {
 			this.characters = characters
 		});
+		db.encounters.toArray().then(encounters => {
+			this.encounters = encounters
+		});
 
-		// this runs when the component is mounted
+		// This runs when the component is mounted
 		fetch("creatures.json")
 			.then(data => data.json())
 			.then(creatures => { this.creatures = creatures })
