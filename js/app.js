@@ -16,8 +16,10 @@ var app = new Vue({
 		activeCombatant: 0,
 		turn: 0,
 		activeTab: 1,
-		newCharacterForm: false,
-		hideSidebar: false
+		hideSidebar: false,
+		forms: {
+			newCharacter: true
+		}
 	},
 	components: {
 		'creature-listing': {
@@ -88,7 +90,7 @@ var app = new Vue({
 					<hr>
 					<form @submit.prevent="onSubmit">
 						<label for="name">Name</label>
-						<input type="text" name="name" v-model="character.name" />
+						<input type="text" name="name" v-model="character.name" required />
 						<br>
 						<label for="type">Type</label>
 						<input type="text" name="type" v-model="character.type" />
@@ -104,21 +106,31 @@ var app = new Vue({
 						<input type="text" name="level" v-model="character.level" />
 						<br>
 						<label for="hit_points">Hit Points</label>
-						<input type="number" name="hit_points" value="1" v-model="character.hit_points" />
+						<input type="number" name="hit_points" value="10" v-model="character.hit_points" />
 						<input type="text" name="hit_dice" value="1d1+0" v-model="character.hit_dice" />
 						<br>
 						<label for="armor_class">Armor Class</label>
 						<input type="number" name="armor_class" value="10" />
-						<br>
-						<input type="number" name="strength" value="10" v-model="character.strength" />
-						<input type="number" name="dexterity" value="10" v-model="character.dexterity" />
-						<input type="number" name="constitution" value="10" v-model="character.constitution" />
-						<input type="number" name="intelligence" value="10" v-model="character.intelligence" />
-						<input type="number" name="wisdom" value="10" v-model="character.wisdom" />
-						<input type="number" name="charisma" value="10" v-model="character.charisma" />
-						<br>
+						<div class="ability-scores">
+							<p v-if="errors.abilityScore">
+								<strong>Error:</strong> Invalid ability score.
+								Ability scores must be a number between 0 and 30.
+							</p>
+							<label for="strength">Strength</label>
+							<input type="number" name="strength" value="10" v-model="character.strength" />
+							<label for="dexterity">Dexterity</label>
+							<input type="number" name="dexterity" value="10" v-model="character.dexterity" />
+							<label for="constitution">Constitution</label>
+							<input type="number" name="constitution" value="10" v-model="character.constitution" />
+							<label for="intelligence">Intelligence</label>
+							<input type="number" name="intelligence" value="10" v-model="character.intelligence" />
+							<label for="wisdom">Wisdom</label>
+							<input type="number" name="wisdom" value="10" v-model="character.wisdom" />
+							<label for="charisma">Charisma</label>
+							<input type="number" name="charisma" value="10" v-model="character.charisma" />
+						</div>
 						<input type="submit" value="Submit" />
-						<button type="button" v-on:click="$parent.newCharacterForm = false">
+						<button type="button" v-on:click="$parent.forms.newCharacter = false">
 							Cancel
 						</button>
 					</form>
@@ -139,11 +151,17 @@ var app = new Vue({
 						intelligence: 10,
 						wisdom: 10,
 						charisma: 10
+					},
+					errors: {
+						blankName: false,
+						abilityScore: false
 					}
 				}
 			},
 			methods: {
 				onSubmit: function(event) {
+					// First, attempt to validate the form
+
 					// Make a clone of the current character
 					var clone = JSON.parse(JSON.stringify(this.character));
 
@@ -167,7 +185,7 @@ var app = new Vue({
 						charisma: 10
 					};
 					// Close the form dialog
-					this.$parent.newCharacterForm = false;
+					this.$parent.forms.newCharacter = false;
 				}
 			}
 		}
@@ -240,17 +258,18 @@ var app = new Vue({
                 + currentDate.getHours() + ":"  
                 + currentDate.getMinutes() + ":" 
                 + currentDate.getSeconds();
-            var combatants = this.initiative_order;
             var encounter = {
             	name: name,
-            	combatants: combatants,
+            	combatants: this.initativeOrder,
             };
+
+            console.log(encounter);
 
 			db.encounters.add(encounter);
 			this.encounters.push(encounter);
 		},
 		loadEncounter: function (index) {
-			this.initiative_order = this.encounters[index].combatants;
+			this.initativeOrder = this.encounters[index].combatants;
 		},
 		beginCombat: function (event) {
 			this.state = STATES.combat;
@@ -263,15 +282,12 @@ var app = new Vue({
 		advanceTurn: function (event) {
 			this.turn += 1;
 			console.log(this.turn);
-		},
-		onNewCharacterFormSubmitted: function (event) {
-			console.log(event);
 		}
 	},
 	created: function () {
 		// Configure the database
 		db = new Dexie('final_year_project');
-		db.version(3).stores({
+		db.version(2).stores({
 			characters: '++id,name,type,size,hit_points,hit_dice,armor_class,strength,dexterity,constitution,wisdom,charisma',
 			encounters: '++id,name,combatants'
 		});
