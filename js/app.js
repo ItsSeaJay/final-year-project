@@ -88,6 +88,11 @@ var app = new Vue({
 				<div>
 					<h2>New Character</h2>
 					<hr>
+					<p v-if="errors.length">
+						<ul>
+							<li v-for="error in errors">{{ error }}</li>
+						</ul>
+					</p>
 					<form @submit.prevent="onSubmit">
 						<label for="name">Name</label>
 						<input type="text" name="name" v-model="character.name" required />
@@ -106,28 +111,24 @@ var app = new Vue({
 						<input type="text" name="level" v-model="character.level" />
 						<br>
 						<label for="hit_points">Hit Points</label>
-						<input type="number" name="hit_points" value="10" v-model="character.hit_points" />
+						<input type="number" name="hit_points" value="10" v-model="character.hit_points" required />
 						<input type="text" name="hit_dice" value="1d1+0" v-model="character.hit_dice" />
 						<br>
 						<label for="armor_class">Armor Class</label>
 						<input type="number" name="armor_class" value="10" />
 						<div class="ability-scores">
-							<p v-if="errors.abilityScore">
-								<strong>Error:</strong> Invalid ability score.
-								Ability scores must be a number between 0 and 30.
-							</p>
 							<label for="strength">Strength</label>
-							<input type="number" name="strength" value="10" v-model="character.strength" />
+							<input type="number" name="strength" value="10" v-model="character.strength" required />
 							<label for="dexterity">Dexterity</label>
-							<input type="number" name="dexterity" value="10" v-model="character.dexterity" />
+							<input type="number" name="dexterity" value="10" v-model="character.dexterity" required />
 							<label for="constitution">Constitution</label>
-							<input type="number" name="constitution" value="10" v-model="character.constitution" />
+							<input type="number" name="constitution" value="10" v-model="character.constitution" required />
 							<label for="intelligence">Intelligence</label>
-							<input type="number" name="intelligence" value="10" v-model="character.intelligence" />
+							<input type="number" name="intelligence" value="10" v-model="character.intelligence" required />
 							<label for="wisdom">Wisdom</label>
-							<input type="number" name="wisdom" value="10" v-model="character.wisdom" />
+							<input type="number" name="wisdom" value="10" v-model="character.wisdom" required />
 							<label for="charisma">Charisma</label>
-							<input type="number" name="charisma" value="10" v-model="character.charisma" />
+							<input type="number" name="charisma" value="10" v-model="character.charisma" required />
 						</div>
 						<input type="submit" value="Submit" />
 						<button type="button" v-on:click="$parent.forms.newCharacter = false">
@@ -152,15 +153,69 @@ var app = new Vue({
 						wisdom: 10,
 						charisma: 10
 					},
-					errors: {
-						blankName: false,
-						abilityScore: false
-					}
+					errors: [],
 				}
 			},
 			methods: {
+				validate: function () {
+					var valid = true;
+
+					// Reset the list of errors
+					this.errors = [];
+					
+					if (this.character.name === '') {
+						this.errors.push('Name required');
+					}
+
+					if (this.character.hit_points === null) {
+						this.errors.push('Hit points required');
+					}
+
+					if (this.character.hit_points < 0) {
+						this.errors.push('Hit points cannot be negative');
+					}
+
+					if (this.character.level < 0 || this.character.level > 20) {
+						this.errors.push('Invalid character level');
+					}
+
+					if (this.character.strength < 0 || this.character.strength > 30) {
+						this.errors.push('Invalid strength score');
+					}
+
+					if (this.character.dexterity < 0 || this.character.dexterity > 30) {
+						this.errors.push('Invalid dexterity score');
+					}
+
+					if (this.character.constitution < 0 || this.character.constitution > 30) {
+						this.errors.push('Invalid constitution score');
+					}
+
+					if (this.character.intelligence < 0 || this.character.intelligence > 30) {
+						this.errors.push('Invalid intelligence score');
+					}
+
+					if (this.character.wisdom < 0 || this.character.wisdom > 30) {
+						this.errors.push('Invalid wisdom score');
+					}
+
+					if (this.character.charisma < 0 || this.character.charisma > 30) {
+						this.errors.push('Invalid charisma score');
+					}
+
+					if (this.errors.length > 0) {
+						valid = false;
+					}
+
+					return valid;
+				},
 				onSubmit: function(event) {
 					// First, attempt to validate the form
+					if (this.validate() === false) {
+						event.preventDefault();
+
+						return;
+					}
 
 					// Make a clone of the current character
 					var clone = JSON.parse(JSON.stringify(this.character));
@@ -184,8 +239,9 @@ var app = new Vue({
 						wisdom: 10,
 						charisma: 10
 					};
+
 					// Close the form dialog
-					this.$parent.forms.newCharacter = false;
+					this.$parent.newCharacterForm = false;
 				}
 			}
 		}
