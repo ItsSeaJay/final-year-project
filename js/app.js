@@ -18,7 +18,7 @@ var app = new Vue({
 		activeTab: 1,
 		hideSidebar: false,
 		forms: {
-			newCharacter: true
+			newCharacter: false
 		}
 	},
 	components: {

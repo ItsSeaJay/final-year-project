@@ -10,17 +10,28 @@ if ('serviceWorker' in navigator) {
 	});
 }
 
-const CACHE_NAME = 'final-year-project-v1';
+const CACHE_NAME = 'final-year-project-v2';
 var urlsToCache = [
 	'/',
-	'/css/boilerplate.css',
+	'/css/main.css',
 	'/css/normalize.css',
+	'/img/sidebar/fast-forward-button.png',
+	'/img/sidebar/large-paint-brush.png',
+	'/img/sidebar/pause-button.png',
+	'/img/sidebar/play-button.png',
+	'/img/sidebar/save.png',
+	'/js/vendor/dexie.min.js',
+	'/js/vendor/vue.min.js',
 	'/js/app.js',
+	'/js/plugins.js',
 	'/404.html',
 	'/browserconfig.xml',
 	'/favicon.ico',
 	'/icon.png',
 	'/index.html',
+	'/creatures.json',
+	'/robots.txt',
+	'/humans.txt',
 	'/tile-wide.png',
 	'/tile.png',
 ];
