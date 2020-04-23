@@ -162,7 +162,7 @@ var app = new Vue({
 
 					// Reset the list of errors
 					this.errors = [];
-					
+
 					if (this.character.name === '') {
 						this.errors.push('Name required');
 					}

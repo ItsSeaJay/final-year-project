@@ -1,10 +1,4 @@
-- Ensure character data from user is valid
-- Make sure that all user input is safe (no XSS)
-- Commit character data to local storage
-- Add hidden field for character ID number
 - Demonstrate asynchronous data upload
-- Allow CRUD for encounters
-- Style every element with CSS
 
 PRIORITISE THE REPORT
 
